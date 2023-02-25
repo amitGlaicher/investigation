@@ -1,0 +1,18 @@
+.investigationPage {
+  height: 80%;
+  background-color: #dfffd8;
+  /* display: flex;
+  flex-direction: column; */
+}
+
+.routes_Nav {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.route {
+  width: 80%;
+  /* display: flex;
+  flex-direction: column; */
+}

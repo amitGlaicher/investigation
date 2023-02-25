@@ -1,0 +1,33 @@
+.camuty_container {
+  height: 100%;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  direction: rtl;
+  background-color: #dfffd8;
+  font-family: 'Poppins', sans-serif;
+}
+
+.camuty_table {
+  width: 100%;
+  height: 100%;
+  /* display: flex; */
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: space-between; */
+  font-family: 'Poppins', sans-serif;
+  border-collapse: collapse;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.thead {
+}
+
+.row {
+  width: 10px;
+}

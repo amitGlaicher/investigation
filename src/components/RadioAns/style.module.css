@@ -1,0 +1,22 @@
+.radioAns_container {
+  direction: rtl;
+  margin-right: 20px;
+  width: 80%;
+  height: 100%;
+}
+.radioAns_table {
+  margin-right: 20px;
+  width: 200px;
+}
+.radio_body {
+  /* margin: 20px; */
+  /* display: table-cell; */
+  justify-content: center;
+  align-items: center;
+}
+
+.cell {
+  /* display: table-cell; */
+  justify-content: center;
+  align-items: center;
+}

@@ -1,5 +1,5 @@
 .navbar_container {
-  height: 100vh;
+  height: 100%;
   width: 20%;
   display: flex;
   flex-direction: column;

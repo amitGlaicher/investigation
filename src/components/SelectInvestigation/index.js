@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { json, useNavigate } from 'react-router-dom';
 import Button from '../Button';
 import Input from '../Input';
 import Choose from '../Choose';
@@ -17,10 +17,22 @@ function SelectInvestigation() {
   const [numCamuty, setNumCamuty] = useState('2');
   const [numMiluly, setNumMiluly] = useState('2');
   const [numEnglish, setNumEnglish] = useState('2');
+  const [disabledNext, setDisabledNext] = useState(true);
   const navigate = useNavigate();
   const onClick = () => {
+    localStorage.setItem("chapters",JSON.stringify({name:firstChoiceSet==='פרק'?[chapterName]:topicChapter,num:numChapterSet,'camuty':numCamuty,'miluly':numMiluly,'english':numEnglish}))
     navigate('./RadioAns');
   };
+
+  useEffect(()=>{
+    if(Number(numCamuty)+Number(numMiluly)+Number(numEnglish)===8||numChapterSet==='6'){
+      setDisabledNext(false)
+    }
+    else{
+      setDisabledNext(true)
+    }    
+  },[numCamuty,numMiluly,numEnglish,numChapterSet])
+  
   return (
     <div className={style.selectInvestigation}>
       <h2 className={style.title}>תחקור</h2>
@@ -54,7 +66,7 @@ function SelectInvestigation() {
                   />
                 </td>
               </tr>
-              <tr>
+              {numChapterSet==='8'&&<tr>
                 <td>כמותי</td>
                 <td>
                   <Choose
@@ -63,8 +75,8 @@ function SelectInvestigation() {
                     choice={setNumCamuty}
                   />
                 </td>
-              </tr>
-              <tr>
+              </tr>}
+              {numChapterSet==='8'&&<tr>
                 <td>מילולי</td>
                 <td>
                   <Choose
@@ -73,8 +85,8 @@ function SelectInvestigation() {
                     choice={setNumMiluly}
                   />
                 </td>
-              </tr>
-              <tr>
+              </tr>}
+              {numChapterSet==='8'&&<tr>
                 <td>אנגלית</td>
                 <td>
                   <Choose
@@ -83,12 +95,12 @@ function SelectInvestigation() {
                     choice={setNumEnglish}
                   />
                 </td>
-              </tr>
+              </tr>}
             </>
           )}
 
           {firstChoiceSet === 'פרק' && (
-            <>
+            <tr>
               <td>בחר פרק</td>
               <td>
                 <Choose
@@ -97,11 +109,11 @@ function SelectInvestigation() {
                   choice={setChapterName}
                 />
               </td>
-            </>
+            </tr>
           )}
         </tbody>
       </table>
-      {firstChoiceSet && <Button text={'הבא'} onClick={onClick} />}
+      {firstChoiceSet && <Button text={'הבא'} disabled={disabledNext} onClick={onClick} />}
     </div>
   );
 }

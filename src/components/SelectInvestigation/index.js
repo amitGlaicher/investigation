@@ -39,7 +39,13 @@ function SelectInvestigation() {
           {firstChoiceSet === 'מבחן' && (
             <>
               <tr>
-                <td> שם הסימולציה</td>
+                <td> שם הסימולציה. חודש:</td>
+                <td>
+                  <Input />
+                </td>
+              </tr>
+              <tr>
+                <td> שנה:</td>
                 <td>
                   <Input />
                 </td>

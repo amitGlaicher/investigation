@@ -4,7 +4,7 @@ import style from './style.module.css';
 
 function VocabularyPage() {
   return (
-    <div>
+    <div className={style.vocabularyPage}>
       <Vocabulary />
     </div>
   );

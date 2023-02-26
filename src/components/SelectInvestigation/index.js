@@ -20,19 +20,30 @@ function SelectInvestigation() {
   const [disabledNext, setDisabledNext] = useState(true);
   const navigate = useNavigate();
   const onClick = () => {
-    localStorage.setItem("chapters",JSON.stringify({name:firstChoiceSet==='פרק'?[chapterName]:topicChapter,num:numChapterSet,'camuty':numCamuty,'miluly':numMiluly,'english':numEnglish}))
+    localStorage.setItem(
+      'chapters',
+      JSON.stringify({
+        name: firstChoiceSet === 'פרק' ? [chapterName] : topicChapter,
+        num: numChapterSet,
+        camuty: numCamuty,
+        miluly: numMiluly,
+        english: numEnglish,
+      })
+    );
     navigate('./RadioAns');
   };
 
-  useEffect(()=>{
-    if(Number(numCamuty)+Number(numMiluly)+Number(numEnglish)===8||numChapterSet==='6'){
-      setDisabledNext(false)
+  useEffect(() => {
+    if (
+      Number(numCamuty) + Number(numMiluly) + Number(numEnglish) === 8 ||
+      numChapterSet === '6'
+    ) {
+      setDisabledNext(false);
+    } else {
+      setDisabledNext(true);
     }
-    else{
-      setDisabledNext(true)
-    }    
-  },[numCamuty,numMiluly,numEnglish,numChapterSet])
-  
+  }, [numCamuty, numMiluly, numEnglish, numChapterSet]);
+
   return (
     <div className={style.selectInvestigation}>
       <h2 className={style.title}>תחקור</h2>
@@ -41,23 +52,19 @@ function SelectInvestigation() {
           <tr>
             <td>מה תרצה לתחקר?</td>
             <td>
-              <Choose
-                array={firstChoice}
-                disabled={undefined}
-                choice={setFirstChoiceSet}
-              />
+              <Choose array={firstChoice} choice={setFirstChoiceSet} />
             </td>
           </tr>
           {firstChoiceSet === 'מבחן' && (
             <>
               <tr>
-                <td> שם הסימולציה. חודש:</td>
+                <td> שם הסימולציה:</td>
                 <td>
                   <Input />
                 </td>
               </tr>
               <tr>
-                <td> שנה:</td>
+                <td> תאריך ביצוע:</td>
                 <td>
                   <Input />
                 </td>
@@ -65,43 +72,33 @@ function SelectInvestigation() {
               <tr>
                 <td>מספר פרקים</td>
                 <td>
-                  <Choose
-                    array={numSumChapters}
-                    disabled={undefined}
-                    choice={setNumChapterSet}
-                  />
+                  <Choose array={numSumChapters} choice={setNumChapterSet} />
                 </td>
               </tr>
-              {numChapterSet==='8'&&<tr>
-                <td>כמותי</td>
-                <td>
-                  <Choose
-                    array={numChapter}
-                    disabled={undefined}
-                    choice={setNumCamuty}
-                  />
-                </td>
-              </tr>}
-              {numChapterSet==='8'&&<tr>
-                <td>מילולי</td>
-                <td>
-                  <Choose
-                    array={numChapter}
-                    disabled={undefined}
-                    choice={setNumMiluly}
-                  />
-                </td>
-              </tr>}
-              {numChapterSet==='8'&&<tr>
-                <td>אנגלית</td>
-                <td>
-                  <Choose
-                    array={numChapter}
-                    disabled={undefined}
-                    choice={setNumEnglish}
-                  />
-                </td>
-              </tr>}
+              {numChapterSet === '8' && (
+                <tr>
+                  <td>כמותי</td>
+                  <td>
+                    <Choose array={numChapter} choice={setNumCamuty} />
+                  </td>
+                </tr>
+              )}
+              {numChapterSet === '8' && (
+                <tr>
+                  <td>מילולי</td>
+                  <td>
+                    <Choose array={numChapter} choice={setNumMiluly} />
+                  </td>
+                </tr>
+              )}
+              {numChapterSet === '8' && (
+                <tr>
+                  <td>אנגלית</td>
+                  <td>
+                    <Choose array={numChapter} choice={setNumEnglish} />
+                  </td>
+                </tr>
+              )}
             </>
           )}
 
@@ -109,17 +106,15 @@ function SelectInvestigation() {
             <tr>
               <td>בחר פרק</td>
               <td>
-                <Choose
-                  array={topicChapter}
-                  disabled={undefined}
-                  choice={setChapterName}
-                />
+                <Choose array={topicChapter} choice={setChapterName} />
               </td>
             </tr>
           )}
         </tbody>
       </table>
-      {firstChoiceSet && <Button text={'הבא'} disabled={disabledNext} onClick={onClick} />}
+      {firstChoiceSet && (
+        <Button text={'הבא'} disabled={disabledNext} onClick={onClick} />
+      )}
     </div>
   );
 }

@@ -5,7 +5,9 @@ import Button from '../Button';
 import style from './style.module.css';
 
 function RadioAns() {
-  const [answer, setAnswer] = useState();
+  const [answer1, setAnswer1] = useState();
+  const [answer2, setAnswer2] = useState();
+  const [answer3, setAnswer3] = useState();
   const [chapterName, setChapterName] = useState();
   const [arrayNum, setArrayNum] = useState([]);
   const [numClickNext, setNumClickNext] = useState(0);
@@ -42,8 +44,14 @@ function RadioAns() {
       setNumClickNext((prev) => ++prev);
     }
   };
-  const onRadioInput = (e, index) => {
-    setAnswer(e.target.value);
+  const onRadioInput1 = (e) => {
+    setAnswer1(e.target.value);
+  };
+  const onRadioInput2 = (e) => {
+    setAnswer2(e.target.value);
+  };
+  const onRadioInput3 = (e) => {
+    setAnswer3(e.target.value);
   };
   useEffect(() => {
     if (chapterName === 'כמותי') {
@@ -68,19 +76,19 @@ function RadioAns() {
         <h4>{chapterName}</h4>
         <form className={style.form_container} onSubmit={handleSubmit}>
           <h6>פרק 1: </h6>
-          <Answers arrayNum={arrayNum} onRadioInput={onRadioInput} />
-          {chaptersChoice[chapterNameEngilsh] == '2' && (
+          <Answers arrayNum={arrayNum} onRadioInput={onRadioInput1} />
+          {chaptersChoice[chapterNameEngilsh] === '2' && (
             <>
               <h6>פרק 2: </h6>
-              <Answers arrayNum={arrayNum} onRadioInput={onRadioInput} />
+              <Answers arrayNum={arrayNum} onRadioInput={onRadioInput2} />
             </>
           )}
-          {chaptersChoice[chapterNameEngilsh] == '3' && (
+          {chaptersChoice[chapterNameEngilsh] === '3' && (
             <>
               <h6>פרק 2: </h6>
-              <Answers arrayNum={arrayNum} onRadioInput={onRadioInput} />
+              <Answers arrayNum={arrayNum} onRadioInput={onRadioInput2} />
               <h6>פרק 3: </h6>
-              <Answers arrayNum={arrayNum} onRadioInput={onRadioInput} />
+              <Answers arrayNum={arrayNum} onRadioInput={onRadioInput3} />
             </>
           )}
           <Button

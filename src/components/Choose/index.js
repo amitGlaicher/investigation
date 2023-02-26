@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './style.module.css';
 
-function Choose({ array, disabled, choice }) {
+function Choose({ array, disabled = false, choice }) {
   const onInput = (e) => {
     if (choice !== false) {
       choice(e.target.value);
@@ -12,11 +12,7 @@ function Choose({ array, disabled, choice }) {
       <label>
         <select disabled={disabled} onInput={onInput}>
           {array.map((topic) => (
-            <option
-              className={style.topic}
-              key={topic}
-              value={topic}
-            >
+            <option className={style.topic} key={topic} value={topic}>
               {topic}
             </option>
           ))}

@@ -7,7 +7,6 @@ import LoginPage from '../../pages/LoginPage';
 function LayOut() {
   const [token, setToken] = useState(true);
   return (
-    <div className={style.layOut}>
       <Routes>
         <Route
           path="/*"
@@ -16,7 +15,6 @@ function LayOut() {
           }
         />
       </Routes>
-    </div>
   );
 }
 

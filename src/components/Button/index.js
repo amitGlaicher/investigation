@@ -1,11 +1,9 @@
 import React from 'react';
 import style from './style.module.css';
 
-function Button({ text, onClick }) {
+function Button({ text, onClick,disabled=false ,...props}) {
   return (
-    <div onClick={onClick}>
-      <button>{text}</button>
-    </div>
+      <button disabled={disabled} onClick={onClick} ref={props.setref?props.setref:null} props>{text}</button>
   );
 }
 

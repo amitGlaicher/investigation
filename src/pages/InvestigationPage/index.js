@@ -1,24 +1,26 @@
-import React, { useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
-import Camuty from '../../components/Camuty';
-import English from '../../components/English';
-import Miluly from '../../components/Miluly';
-import SelectInvestigation from '../../components/SelectInvestigation';
-import Header from '../../components/Header';
-import NavBar from '../../components/NavBar';
-import style from './style.module.css';
-import RadioAns from '../../components/RadioAns';
-import HistoryPage from '../HistoryPage';
-import InsightsPage from '../InsightsPage';
-import VocabularyPage from '../VocabularyPage';
-import MyAdvancePage from '../MyadvancePage';
+import React, { useState } from "react";
+import { Route, Routes } from "react-router-dom";
+import Camuty from "../../components/Camuty";
+import English from "../../components/English";
+import Miluly from "../../components/Miluly";
+import SelectInvestigation from "../../components/SelectInvestigation";
+import Header from "../../components/Header";
+import NavBar from "../../components/NavBar";
+import style from "./style.module.css";
+import RadioAns from "../../components/RadioAns";
+import HistoryPage from "../HistoryPage";
+import InsightsPage from "../InsightsPage";
+import VocabularyPage from "../VocabularyPage";
+import MyAdvancePage from "../MyadvancePage";
 
 function InvestigationPage({ setToken }) {
   const [navOpen, setNavOpen] = useState(true);
   return (
-    <div className={style.investigationPage}>
-      <Header navOpen={navOpen} setNavOpen={setNavOpen} />
-      <div className={style.routes_Nav}>
+    <div className={style.layout}>
+        <Header navOpen={navOpen} setNavOpen={setNavOpen} />
+      <div  className={style.investigationPage}>
+      {navOpen && <NavBar setToken={setToken} />}
+      <div className={style.main}>
         <Routes>
           <Route path="/*" element={<SelectInvestigation />} />
           <Route path="/MyAdvance" element={<MyAdvancePage />} />
@@ -30,7 +32,7 @@ function InvestigationPage({ setToken }) {
           <Route path="RadioAns/Miluly" element={<Miluly />} />
           <Route path="RadioAns/English" element={<English />} />
         </Routes>
-        {navOpen && <NavBar setToken={setToken} />}
+      </div>
       </div>
     </div>
   );

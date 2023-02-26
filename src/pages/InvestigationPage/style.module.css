@@ -1,18 +1,19 @@
-.investigationPage {
-  height: 80%;
-  background-color: #dfffd8;
-  /* display: flex;
-  flex-direction: column; */
+.layout{
+  height: 100vh;
 }
-
-.routes_Nav {
-  height: 100%;
+.investigationPage {
+  height: 93%;
   display: flex;
   flex-direction: row;
 }
 
-.route {
-  width: 80%;
-  /* display: flex;
-  flex-direction: column; */
+.main{
+  border: solid 1px #000;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar{
+  display: none;
 }

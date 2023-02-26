@@ -16,7 +16,6 @@ function Choose({ array, disabled, choice }) {
               className={style.topic}
               key={topic}
               value={topic}
-              choice={choice}
             >
               {topic}
             </option>

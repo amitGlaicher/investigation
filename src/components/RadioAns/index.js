@@ -15,8 +15,6 @@ function RadioAns() {
   const question1 = useRef();
   const question2 = useRef();
 
-  const arrayQuestions = [question1, question2];
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (chapterName === 'כמותי') {

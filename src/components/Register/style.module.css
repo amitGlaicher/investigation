@@ -1,0 +1,36 @@
+.formLoginContainer {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid seagreen;
+}
+
+.formLogin {
+  width: 30%;
+  height: 30%;
+  background-color: var(--bg-thirdary-color);
+  font-size: var(--font-size-label);
+  color: white;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  direction: rtl;
+  align-items: center;
+  justify-content: center;
+}
+
+.inputLogin {
+  width: 70%;
+}
+
+.login_button {
+  margin-right: 10px;
+  margin-left: 10px;
+  justify-content: space-between;
+  margin-left: 10px;
+  margin-right: 10px;
+  /* width: 35%; */
+}

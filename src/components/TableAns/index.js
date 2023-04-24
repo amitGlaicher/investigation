@@ -1,13 +1,13 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ansContext } from '../../App';
-import { useForm } from 'react-hook-form';
-import Button from '../Button';
-import Camuty from '../Camuty';
-import English from '../English';
-import Miluly from '../Miluly';
-import style from './style.module.css';
-import apiCalls from '../../Helpers/apiCalls.js';
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { ansContext } from "../../App";
+import { useForm } from "react-hook-form";
+import Button from "../Button";
+import Camuty from "../Camuty";
+import English from "../English";
+import Miluly from "../Miluly";
+import style from "./style.module.css";
+import apiCalls from "../../Helpers/apiCalls.js";
 
 function TableAns() {
   const submitRef = useRef();
@@ -19,50 +19,50 @@ function TableAns() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { data } = useForm();
-  const answers = [];
-  const title = JSON.parse(localStorage.getItem('chapters'));
+  var answers = [];
+  const title = JSON.parse(localStorage.getItem("chapters"));
 
   let numLoops = 0;
   const arraybigData = [];
   const createBigArray = async () => {
     const statesArray = answerContext.map(([state]) => state);
     statesArray.forEach((chapter) => {
-      if (chapter.length <= 1) {
-        return;
+      if (useData[numLoops] && chapter[1]) {
+        let object = { title: "", correct: [], incorrect: [] };
+        object.title = useData[numLoops].title;
+        chapter.forEach((value) => {
+          if (value === "correct") {
+            object.correct.push(useData[numLoops]);
+            numLoops++;
+          } else if (value === "incorrect") {
+            object.incorrect.push(useData[numLoops]);
+            numLoops++;
+          }
+        });
+        arraybigData.push(object);
       }
-      let object = { title: '', correct: [], incorrect: [] };
-      console.log(useData[numLoops]);
-      object.title = useData[numLoops].title;
-      chapter.forEach((value) => {
-        if (value === 'correct') {
-          object.correct.push(useData[numLoops]);
-          numLoops++;
-        } else if (value === 'incorrect') {
-          object.incorrect.push(useData[numLoops]);
-          numLoops++;
-        }
-      });
-      arraybigData.push(object);
     });
   };
   const sendUseData = async () => {
     await createBigArray();
+    console.log(arraybigData);
     const chapters = JSON.parse(localStorage.chapters);
-    await apiCalls('put', 'user/addtest', {
+    await apiCalls("put", "user/addtest", {
       simulationName: chapters.simName,
       numChapters: chapters.num,
       data: arraybigData,
     });
-    navigate('../nextPage');
+    navigate("../nextPage");
   };
 
   useEffect(() => {
+    answers = [];
     answerContext.forEach((array) => {
       if (array[0].length > 0) {
         answers.push(
           array[0]
             .map((answer, index) => {
-              if (answer === 'correct') return index;
+              if (answer === "correct") return index;
               else return false;
             })
             .filter((answer) => answer !== false)
@@ -70,7 +70,7 @@ function TableAns() {
         answers.push(
           array[0]
             .map((answer, index) => {
-              if (answer === 'incorrect') return index;
+              if (answer === "incorrect") return index;
               else return false;
             })
             .filter((answer) => answer !== false)
@@ -78,14 +78,16 @@ function TableAns() {
       }
     });
     if (title.name.length === 3) {
-      if (numClickNext < title.camuty * 2) setChapter('כמותי');
+      console.log(numClickNext);
+      console.log(chapter);
+      if (numClickNext < title.camuty * 2) setChapter("כמותי");
       else if (numClickNext < title.camuty * 2 + title.miluly * 2)
-        setChapter('מילולי');
+        setChapter("מילולי");
       else if (
-        numClickNext <
+        numClickNext <=
         title.camuty * 2 + title.miluly * 2 + title.english * 2
-      )
-        setChapter('אנגלית');
+      ){
+        setChapter("אנגלית");}
       else {
         setLoading(true);
         sendUseData();
@@ -93,11 +95,13 @@ function TableAns() {
       }
       if (numClickNext < answers.length && answers[numClickNext].length > 0)
         setArrayToMap(answers[numClickNext]);
-      else setNumClickNext((prev) => ++prev);
+      else {
+        setNumClickNext((prev) => ++prev);
+      }
     } else {
-      if (title.name[0] === 'כמותי') setChapter('כמותי');
-      else if (title.name[0] === 'מילולי') setChapter('מילולי');
-      else setChapter('אנגלית');
+      if (title.name[0] === "כמותי") setChapter("כמותי");
+      else if (title.name[0] === "מילולי") setChapter("מילולי");
+      else setChapter("אנגלית");
       if (answers[numClickNext].length > 0)
         setArrayToMap(answers[numClickNext]);
       else setLoading(true);
@@ -112,46 +116,84 @@ function TableAns() {
 
   const onSubmit = (data) => {
     data.preventDefault();
-    const correct = [
-      'מספר שאלה',
-      'נושא',
-      'תת נושא',
-      'גורם קושי',
-      'דרך פתרון',
-      'סוג לקח',
-      'לקח יישומי',
-    ];
-    const incorrect = [
-      'מספר שאלה',
-      'נושא',
-      'תת נושא',
-      'גורם קושי',
-      'סוג הטעות',
-      'הסיבה לטעות',
-      'דרך פתרון',
-      'סוג לקח',
-      'לקח יישומי',
-    ];
+    const correct =
+      chapter == "כמותי"
+        ? [
+            "מספר שאלה",
+            "נושא",
+            "תת נושא",
+            "גורם קושי",
+            "דרך פתרון",
+            "סוג לקח",
+            "לקח יישומי",
+          ]
+        : chapter == "מילולי"
+        ? ["מספר שאלה", "נושא", "תת נושא", "גורם קושי", "סוג לקח", "לקח יישומי"]
+        : [
+            "מספר שאלה",
+            "נושא",
+            "גורם קושי",
+            "סוג לקח",
+            "לקח יישומי",
+            "מילה חדשה",
+          ];
+    const incorrect =
+      chapter == "כמותי"
+        ? [
+            "מספר שאלה",
+            "נושא",
+            "תת נושא",
+            "גורם קושי",
+            "סוג הטעות",
+            "הסיבה לטעות",
+            "דרך פתרון",
+            "סוג לקח",
+            "לקח יישומי",
+          ]
+        : chapter == "מילולי"
+        ? [
+            "מספר שאלה",
+            "נושא",
+            "תת נושא",
+            "גורם קושי",
+            "הסיבה לטעות",
+            "סוג לקח",
+            "לקח יישומי",
+          ]
+        : [
+            "מספר שאלה",
+            "נושא",
+            "גורם קושי",
+            "הסיבה לטעות",
+            "סוג לקח",
+            "לקח יישומי",
+            "מילה חדשה",
+          ];
+
+    let arrayDataForUseData = [];
     const value = [...data.target];
     let print = { title: chapter };
-
     if (numClickNext % 2 === 0) {
       for (let i = 0; i < value.length; i++) {
         if (value[i].value) {
-          print[correct[i % 7]] = value[i].value;
+          print[correct[i % correct.length]] = value[i].value;
+        }
+        if ((i + 1) % correct.length === 0) {
+          arrayDataForUseData.push({ ...print });
         }
       }
     } else {
       for (let i = 0; i < value.length; i++) {
         if (value[i].value) {
-          print[incorrect[i % 9]] = value[i].value;
+          print[incorrect[i % incorrect.length]] = value[i].value;
+        }
+        if ((i + 1) % incorrect.length === 0) {
+          arrayDataForUseData.push({ ...print });
         }
       }
     }
-    setUseData((prev) => [...prev, print]);
-    console.log(useData);
+    setUseData((prev) => [...prev, ...arrayDataForUseData]);
   };
-
   return loading ? (
     <h2>טוען</h2>
   ) : (
@@ -170,7 +212,7 @@ function TableAns() {
                 מספר<br></br> שאלה
               </th>
               <th className={style.thead_cell}>נושא</th>
-              {chapter !== 'אנגלית' && (
+              {chapter !== "אנגלית" && (
                 <th className={style.thead_cell}>
                   תת <br></br> נושא
                 </th>
@@ -180,7 +222,7 @@ function TableAns() {
               </th>
               {numClickNext % 2 === 1 && (
                 <>
-                  {chapter === 'כמותי' && (
+                  {chapter === "כמותי" && (
                     <th className={style.thead_cell}>
                       סוג <br></br> הטעות
                     </th>
@@ -190,7 +232,7 @@ function TableAns() {
                   </th>
                 </>
               )}
-              {chapter === 'כמותי' && (
+              {chapter === "כמותי" && (
                 <th className={style.thead_cell}>
                   דרך <br></br> פתרון
                 </th>
@@ -201,28 +243,28 @@ function TableAns() {
               <th className={style.thead_cell}>
                 לקח <br></br> יישומי
               </th>
-              {chapter === 'אנגלית' && (
+              {chapter === "אנגלית" && (
                 <th className={style.thead_cell}>
-                  מילה <br></br> חדשה{' '}
+                  מילה <br></br> חדשה{" "}
                 </th>
               )}
             </tr>
           </thead>
-          {chapter === 'כמותי' && (
+          {chapter === "כמותי" && (
             <Camuty
               arrayToMap={arrayToMap}
               numClickNext={numClickNext}
               data={data}
             />
           )}
-          {chapter === 'מילולי' && (
+          {chapter === "מילולי" && (
             <Miluly
               arrayToMap={arrayToMap}
               numClickNext={numClickNext}
               data={data}
             />
           )}
-          {chapter === 'אנגלית' && (
+          {chapter === "אנגלית" && (
             <English
               arrayToMap={arrayToMap}
               numClickNext={numClickNext}
@@ -237,7 +279,7 @@ function TableAns() {
           setref={submitRef}
         />
       </form>
-      <Button text={'הבא'} onClick={onClick} />
+      <Button text={"הבא"} onClick={onClick} />
     </div>
   );
 }

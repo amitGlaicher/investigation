@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../Button';
 import style from './style.module.css';
 import apiCalls from '../../Helpers/apiCalls.js';
+import Answers from '../Answers';
+import { ansContext } from '../../App';
 
 function NavBar({ setToken }) {
+  const answersContext = useContext(ansContext)
   const insights = async () => {
     const res = await apiCalls('get', 'user/insights');
     // console.log(res);
@@ -23,6 +26,9 @@ function NavBar({ setToken }) {
         text={'תחקור חדש'}
         onClick={() => {
           localStorage.setItem('chapters', '');
+          answersContext.forEach(arr => {
+            arr[1]([])
+          });
           navigate('./');
         }}
       />

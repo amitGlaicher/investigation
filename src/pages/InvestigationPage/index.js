@@ -24,8 +24,6 @@ function InvestigationPage({ setToken }) {
         <div className={style.main}>
           <Routes>
             <Route path="/*" element={<SelectInvestigation />} />
-            {/* <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} /> */}
             <Route path="/MyAdvance" element={<MyAdvancePage />} />
             <Route path="/vocabulary" element={<VocabularyPage />} />
             <Route path="/insights" element={<InsightsPage />} />

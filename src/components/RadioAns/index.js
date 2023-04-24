@@ -81,7 +81,7 @@ function RadioAns() {
   const onRadioInput3 = (e) => {
     setAnswer3(e.target.value);
     const index =
-      e.target.name.length === '9'
+      e.target.name.length === 9
         ? e.target.name.slice(-1)
         : e.target.name.slice(-2);
     const updatedAns = [...thirdChapterAns];

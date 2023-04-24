@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:3500/api/';
+axios.defaults.baseURL = 'http://localhost:5001/api/';
 // axios.defaults.baseURL = "https://psychometry-server.onrender.com/api/"
 // axios.defaults.baseURL = "https://psychometry-server-production.up.railway.app/api/"
 

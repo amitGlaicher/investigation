@@ -1,33 +1,29 @@
-.camuty_container {
-  height: 100%;
-  width: 80%;
-  display: flex;
-  flex-direction: column;
-  direction: rtl;
-  background-color: #dfffd8;
-  font-family: 'Poppins', sans-serif;
+.inputnone {
+  background: none;
+  border: none;
+  /* width: 30px; */
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
+  transition: border-color 0.2s ease-in-out;
+  text-align: center;
+  pointer-events: none;
 }
 
 .camuty_table {
-  width: 100%;
-  height: 100%;
-  /* display: flex; */
-  flex-direction: column;
-  align-items: center;
-  /* justify-content: space-between; */
-  font-family: 'Poppins', sans-serif;
   border-collapse: collapse;
-}
-
-.title {
+  width: 100%;
+  table-layout: fixed;
   display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.thead {
+  flex-wrap: wrap;
 }
 
 .row {
-  width: 10px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  /* border: 1px solid cyan; */
 }

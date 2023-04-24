@@ -2,7 +2,7 @@ import React from 'react';
 import Input from '../Input';
 import style from './style.module.css';
 
-export default function Answers({ arrayNum, onRadioInput }) {
+export default function Answers({ arrayNum, onRadioInput, uniqueName }) {
   return (
     <table className={style.radioAns_table}>
       <thead className={style.thead}>
@@ -30,17 +30,17 @@ export default function Answers({ arrayNum, onRadioInput }) {
                 <Input
                   type="radio"
                   value="correct"
-                  name={number}
+                  name={`${uniqueName},${number}`}
                   onInput={onRadioInput}
                 />
               </label>
             </td>
             <td>
-              <label className={style.cell} htmlFor="uncorrect">
+              <label className={style.cell} htmlFor="incorrect">
                 <Input
                   type="radio"
-                  name={number}
-                  value="uncorrect"
+                  name={`${uniqueName},${number}`}
+                  value="incorrect"
                   onInput={onRadioInput}
                 />
               </label>

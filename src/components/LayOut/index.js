@@ -7,14 +7,14 @@ import LoginPage from '../../pages/LoginPage';
 function LayOut() {
   const [token, setToken] = useState(true);
   return (
-      <Routes>
-        <Route
-          path="/*"
-          element={
-            token ? <InvestigationPage setToken={setToken} /> : <LoginPage />
-          }
-        />
-      </Routes>
+    <Routes>
+      <Route
+        path="/*"
+        element={
+          token ? <InvestigationPage setToken={setToken} /> : <LoginPage />
+        }
+      />
+    </Routes>
   );
 }
 

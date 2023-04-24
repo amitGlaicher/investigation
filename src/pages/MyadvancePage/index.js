@@ -1,11 +1,11 @@
 import React from 'react';
-import MyAdvance from '../../components/Myadvance';
+import MyAdvanced from '../../components/MyAdvanced';
 import style from './style.module.css';
 
 function MyAdvancePage() {
   return (
     <div className={style.myAdvancePage}>
-      <MyAdvance />
+      <MyAdvanced />
     </div>
   );
 }

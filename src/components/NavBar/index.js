@@ -2,8 +2,14 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../Button';
 import style from './style.module.css';
+import apiCalls from '../../Helpers/apiCalls.js';
 
 function NavBar({ setToken }) {
+  const insights = async () => {
+    const res = await apiCalls('get', 'user/insights');
+    // console.log(res);
+    navigate('./insights');
+  };
   const navigate = useNavigate();
   return (
     <div className={style.navbar_container}>
@@ -16,15 +22,11 @@ function NavBar({ setToken }) {
       <Button
         text={'תחקור חדש'}
         onClick={() => {
+          localStorage.setItem('chapters', '');
           navigate('./');
         }}
       />
-      <Button
-        text={'רשימת לקחים'}
-        onClick={() => {
-          navigate('./insights');
-        }}
-      />
+      <Button text={'רשימת לקחים'} onClick={insights} />
       <Button
         text={'אוצר מילים'}
         onClick={() => {

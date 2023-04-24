@@ -1,16 +1,16 @@
 import React from 'react';
-import Button from '../Button';
 import style from './style.module.css';
+import { TiThMenuOutline } from 'react-icons/ti';
 
-function Header({ navOpen, setNavOpen }) {
+function Header({ setNavOpen }) {
   return (
     <div className={style.header}>
       תחקור פסיכומטרי
-      <Button
+      <TiThMenuOutline
         text={'פתיחה'}
+        className={style.icon}
         onClick={() => {
           setNavOpen((prev) => !prev);
-          console.log(navOpen);
         }}
       />
     </div>

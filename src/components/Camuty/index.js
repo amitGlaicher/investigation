@@ -1,27 +1,21 @@
+import style from './style.module.css';
 import React, { useState } from 'react';
 import Choose from '../Choose';
 import Input from '../Input';
-import style from './style.module.css';
 
-function Camuty() {
-  const [answer, setAnswer] = useState();
-  const [isCorrect, setIsCorrect] = useState(false);
-  const [topicChoiceRow1, setTopicChoiceRow1] = useState('אלגברה');
-  const [topicChoiceRow2, setTopicChoiceRow2] = useState('אלגברה');
-  const topicChoice = [topicChoiceRow1, topicChoiceRow2];
-  const setTopicChoice = [setTopicChoiceRow1, setTopicChoiceRow2];
+function Camuty({ arrayToMap, numClickNext, data = () => {} }) {
+  const initialState = Array(20).fill('אלגברה');
+  const [stateArray, setStateArray] = useState(initialState);
 
-  const onChooseAnswer = (e) => {
-    setAnswer(e.target.value);
-  };
-  const onRadioInput = (e) => {
-    onChooseAnswer(e);
-    e.target.value === 'true' ? setIsCorrect(true) : setIsCorrect(false);
-  };
-  const number = [
-    1, 2,
-    //  3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-  ];
+  const setStates = Array.from({ length: 20 }, (_, index) => {
+    return (newState) => {
+      setStateArray((prevState) => {
+        const newStateArray = [...prevState];
+        newStateArray[index] = newState;
+        return newStateArray;
+      });
+    };
+  });
 
   const topics = ['אלגברה', 'גיאומטריה', 'בעיות כמותיות', 'הסקה מתרשים'];
   const subTopicsAlgebra = [
@@ -55,120 +49,145 @@ function Camuty() {
     ' הסתברות ',
   ];
   const subTopicsDiagram = [' תחילת פרק', 'אמצע פרק ', 'סוף פרק '];
-  const causingDifficulty = ['גורם קושי'];
-  const typeError = ['סוג הטעות'];
-  const solution = ['דרך פתרון'];
-  const lesson = ['סוג לקח'];
+  const causingDifficulty = [
+    'ריבוי מלל',
+    'ריבוי נעלמים',
+    'תשובות קרובות',
+    'הערכת סדר גודל',
+    'תרשים מורכב',
+    'דילוג מהבית',
+    'נושא נדיר',
+    'פירוט שיטטי ',
+    'אחר',
+  ];
+  const typeError = ['חישוב ', 'אסטרטגיה', 'שלבי חשיבה'];
+  const solution = [
+    'הצבת תשובות',
+    'הצבה מספרים',
+    'אלגברה',
+    'הערכת סדר גודל',
+    'גיאומטריה',
+    'קיפולי נייר',
+    'יחס',
+    'רגע קסם',
+  ];
+  const lesson = ['התנהלות', 'חשיבה', 'ידע'];
+
   return (
-    <div className={style.camuty_container}>
-      <h2 className={style.title}>פרק כמותי</h2>
-      <form>
-        <table className={style.camuty_table}>
-          <thead className={style.thead}>
-            <tr>
-              <th>מספר שאלה</th>
-              <th>נושא</th>
-              <th>תת נושא</th>
-              <th>גורם קושי</th>
-              <th>סוג הטעות</th>
-              <th>הסיבה לטעות</th>
-              <th>דרך פתרון</th>
-              <th>סוג לקח</th>
-              <th>לקח יישומי</th>
-            </tr>
-          </thead>
-          <tbody>
-            {number.map((number, index) => (
-              <tr key={number} className={style.row}>
-                <td>{number}</td>
-                <td className={style.row}>
-                  <Choose
-                    className={style.firstChoice}
-                    array={topics}
-                    disabled={isCorrect}
-                    choice={setTopicChoice[index]}
-                  />
-                </td>
-                {topicChoice[index] === 'אלגברה' && (
-                  <Choose
-                    array={subTopicsAlgebra}
-                    className={style.firstChoice}
-                    disabled={isCorrect}
-                    choice=""
-                  />
-                )}
-                <td>
-                  {topicChoice[index] === `גיאומטריה` && (
-                    <Choose
-                      array={subTopicsGeometrics}
-                      className={style.firstChoice}
-                      disabled={isCorrect}
-                      choice=""
-                    />
-                  )}
-                  {topicChoice[index] === 'בעיות כמותיות' && (
-                    <Choose
-                      className={style.firstChoice}
-                      array={subTopicsAmountProblems}
-                      disabled={isCorrect}
-                      choice=""
-                    />
-                  )}
-                  {topicChoice[index] === 'הסקה מתרשים' && (
-                    <Choose
-                      array={subTopicsDiagram}
-                      disabled={isCorrect}
-                      className={style.firstChoice}
-                      choice=""
-                    />
-                  )}
-                </td>
-                <td>
-                  {' '}
-                  <Choose
-                    array={causingDifficulty}
-                    disabled={isCorrect}
-                    className={style.firstChoice}
-                    choice=""
-                  />
-                </td>
-                <td>
-                  {' '}
-                  <Choose
-                    array={typeError}
-                    disabled={isCorrect}
-                    className={style.firstChoice}
-                    choice=""
-                  />
-                </td>
-                <td>
-                  <Input
-                    type="Text"
-                    placeholder={'הסיבה לטעות'}
-                    className={style.input}
-                  />
-                </td>
-                <td>
-                  {' '}
-                  <Choose array={solution} disabled={isCorrect} choice="" />
-                </td>
-                <td>
-                  {' '}
-                  <Choose array={lesson} disabled={isCorrect} choice="" />
-                </td>
-                <td>
-                  <Input
-                    type="Text"
-                    placeholder={'לקח יישומי'}
-                    className={style.input}
-                  />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </form>
-    </div>
+    <tbody className={style.camuty}>
+      {arrayToMap.map((number, index) => (
+        <tr key={index} className={style.row}>
+          <td>
+            <input
+              className={style.inputnone}
+              type="number"
+              value={number}
+              onChange={() => {}}
+              {...data(number)}
+            />
+          </td>
+          <td className={style.row}>
+            <Choose
+              className={style.firstChoice}
+              placeholder={' נושא'}
+              array={topics}
+              choice={setStates[index]}
+              data={data}
+            />
+          </td>
+          <td className={style.row}>
+            {stateArray[index] === 'אלגברה' && (
+              <Choose
+                placeholder={' תת נושא'}
+                array={subTopicsAlgebra}
+                className={style.firstChoice}
+                data={data}
+              />
+            )}
+            {stateArray[index] === `גיאומטריה` && (
+              <Choose
+                placeholder={' תת נושא'}
+                array={subTopicsGeometrics}
+                className={style.firstChoice}
+                data={data}
+              />
+            )}
+            {stateArray[index] === 'בעיות כמותיות' && (
+              <Choose
+                placeholder={' תת נושא'}
+                className={style.firstChoice}
+                array={subTopicsAmountProblems}
+                data={data}
+              />
+            )}
+            {stateArray[index] === 'הסקה מתרשים' && (
+              <Choose
+                placeholder={' תת נושא'}
+                array={subTopicsDiagram}
+                className={style.firstChoice}
+                data={data}
+              />
+            )}
+          </td>
+          <td>
+            {' '}
+            <Choose
+              placeholder={'גורם קושי'}
+              array={causingDifficulty}
+              className={style.firstChoice}
+              data={data}
+            />
+          </td>
+          {numClickNext !== 0 && numClickNext % 2 === 1 && (
+            <>
+              <td>
+                {' '}
+                <Choose
+                  placeholder={' סוג הטעות'}
+                  array={typeError}
+                  className={style.firstChoice}
+                  data={data}
+                />
+              </td>
+              <td>
+                <Input
+                  type="Text"
+                  placeholder={'הסיבה לטעות'}
+                  className={style.reason}
+                  data={data}
+                />
+              </td>
+            </>
+          )}
+          <td>
+            {' '}
+            <Choose
+              array={solution}
+              choice=""
+              data={data}
+              placeholder={' דרך פתרון'}
+            />
+          </td>
+          <td>
+            {' '}
+            <Choose
+              array={lesson}
+              choice=""
+              data={data}
+              placeholder={' סוג לקח'}
+            />
+          </td>
+          <td className={style.lesson}>
+            <Input
+              type="Text"
+              placeholder={'לקח יישומי'}
+              className={style.lesson}
+              data={data}
+            />
+          </td>
+        </tr>
+      ))}
+    </tbody>
   );
 }
 

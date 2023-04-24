@@ -1,19 +1,44 @@
 .radioAns_container {
-  margin-right: 20px;
+  display: flex;
+  justify-content: center;
   width: 100%;
+  /* width: 70%; */
   height: 100%;
 }
-.radioAns_table {
-  width: 100%;
+
+.title {
+  align-items: center;
+  margin: 4%;
+  display: flex;
+  flex-direction: column;
 }
 
-.submit_button{
+.radioAns_table {
+  width: 80%;
+  border-collapse: collapse;
+}
+
+.radioAns_table th,
+.radioAns_table td {
+  padding: 10px;
+  /* border: 1px solid black; */
+  border-radius: 15%;
+  text-align: center;
+}
+
+.radioAns_table th {
+  font-weight: bold;
+}
+
+.submit_button {
   visibility: hidden;
   width: 0;
   height: 0;
+  border: none;
+  background: none;
 }
 
-.form_container{
+.form_container {
   width: 100%;
   display: flex;
   flex-direction: row;

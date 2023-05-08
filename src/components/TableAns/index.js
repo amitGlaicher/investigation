@@ -8,10 +8,12 @@ import English from "../English";
 import Miluly from "../Miluly";
 import style from "./style.module.css";
 import apiCalls from "../../Helpers/apiCalls.js";
+import { userContext } from "../LayOut";
 
 function TableAns() {
   const submitRef = useRef();
   const answerContext = useContext(ansContext);
+  const {setUser} = useContext(userContext);
   const [numClickNext, setNumClickNext] = useState(0);
   const [arrayToMap, setArrayToMap] = useState([]);
   const [chapter, setChapter] = useState();
@@ -45,13 +47,13 @@ function TableAns() {
   };
   const sendUseData = async () => {
     await createBigArray();
-    console.log(arraybigData);
     const chapters = JSON.parse(localStorage.chapters);
-    await apiCalls("put", "user/addtest", {
+    const user = await apiCalls("put", "user/addtest", {
       simulationName: chapters.simName,
       numChapters: chapters.num,
       data: arraybigData,
     });
+    setUser(user.data)
     navigate("../nextPage");
   };
 

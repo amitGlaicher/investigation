@@ -33,7 +33,7 @@ export default function Register() {
       <form className={style.formLogin} onSubmit={handleSubmit}>
         <h2 className={style.header}>הרשמה</h2>
         <Input
-          className={style.inputLogin}
+          className={`${style.inputLogin} ${style.inputRegister}`}
           type="text"
           name="fName"
           required={true}

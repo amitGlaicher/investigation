@@ -25,7 +25,7 @@ function Input({
         {...data(selectedValue)}
         type={type}
         placeholder={placeholder}
-        className={style.className}
+        className={className}
         onInput={onInput}
         {...props}
         // ref={inputRef}

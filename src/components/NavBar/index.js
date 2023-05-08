@@ -5,12 +5,12 @@ import style from './style.module.css';
 import apiCalls from '../../Helpers/apiCalls.js';
 import Answers from '../Answers';
 import { ansContext } from '../../App';
+import { userContext } from '../LayOut';
 
 function NavBar({ setToken }) {
   const answersContext = useContext(ansContext)
+  const {setUser} = useContext(userContext)
   const insights = async () => {
-    const res = await apiCalls('get', 'user/insights');
-    // console.log(res);
     navigate('./insights');
   };
   const navigate = useNavigate();
@@ -48,7 +48,8 @@ function NavBar({ setToken }) {
       <Button
         text={'התנתק'}
         onClick={() => {
-          setToken(false);
+          localStorage.removeItem('token')
+          setUser(false);
         }}
       />
     </div>

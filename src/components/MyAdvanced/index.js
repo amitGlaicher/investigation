@@ -1,29 +1,24 @@
 import style from './style.module.css';
 import React, { useRef, useEffect } from 'react';
 import Chart from 'chart.js/auto';
+import { useContext } from 'react';
+import { userContext } from '../LayOut';
 
 function MyAdvanced() {
   const chartRef = useRef();
+  const {user} = useContext(userContext)
 
   useEffect(() => {
     const myChart = new Chart(chartRef.current, {
       type: 'line',
       data: {
-        labels: [
-          // צריך לקבל את שם הסימולציה ולהציגה בציר האיקס לשקול להכניס גם את התאריך
-          'January',
-          'February',
-          'March',
-          'April',
-          'May',
-          'June',
-          'July',
-        ],
+        labels:
+         user.test.map(test=>test.simulationName),
         datasets: [
           {
             label: 'ההתקדמות שלי',
             //צריך להכנס אחוז התשובות הנכונות בכל סימולציה
-            data: [65, 59, 80, 81, 56, 55, 40],
+            data:  user.test.map(test=>(test.correctAnswer/test.sumAnswers)*100),
             fill: false,
             borderColor: 'rgb(75, 192, 192)',
             tension: 0.1,

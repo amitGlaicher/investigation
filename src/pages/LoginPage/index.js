@@ -8,7 +8,7 @@ function LoginPage() {
   return (
     <div className={style.loginPage}>
       <Routes>
-            <Route path="/login" element={<Login />} />
+            <Route path="/*" element={<Login />} />
             <Route path="/register" element={<Register/>} />
       </Routes>
     </div>

@@ -5,7 +5,7 @@ import InvestigationPage from '../../pages/InvestigationPage';
 import LoginPage from '../../pages/LoginPage';
 
 function LayOut() {
-  const [token, setToken] = useState(true);
+  const [token, setToken] = useState(localStorage.getItem('token')||false);
   return (
     <Routes>
       <Route

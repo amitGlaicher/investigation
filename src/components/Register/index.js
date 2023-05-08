@@ -17,15 +17,15 @@ export default function Register() {
     setGender(e.target.value);
   };
   const handleSubmit = async (e) => {
-    //   e.preventDefault();
-    // const user = await apiCalls('post', 'user/register', {
-    //     fName: userfNameInput.current.value,
-    //     lName: userlNameInput.current.value,
-    //     email: userEmailInput.current.value,
-    //     firstPassword: firstPassword.current.value,
-    //     gender: gender,
-    //   });
-    //   navigate('../login');
+      e.preventDefault();
+    const user = await apiCalls('post', 'user/register', {
+        fName: e.target.children[1].value,
+        lName: e.target.children[2].value,
+        email: e.target.children[3].value,
+        password: e.target.children[4].value,
+        gender: gender,
+      });
+      navigate('../login');
   };
 
   return (

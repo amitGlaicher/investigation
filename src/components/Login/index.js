@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import Input from '../Input';
 import Button from '../Button';
 import { useNavigate } from 'react-router-dom';
+import apiCalls from '../../Helpers/apiCalls';
 // import apiCalls from '../../Helpers/apiCalls';
 // import { userContext } from "../../App";
 
@@ -14,11 +15,11 @@ function Login() {
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // const data = await apiCalls('post', 'user/login', {
-    // email: userEmailInput.current.value,
-    // password: userPasswordInput.current.value,
-    // });
-    // localStorage.token = data.data.token;
+    const data = await apiCalls('post', 'user/login', {
+    email: e.target.children[1].value,
+    password: e.target.children[2].value,
+    });
+    localStorage.token = data.data.token;
     // setUser(data.data.user);
     navigate('../');
   };

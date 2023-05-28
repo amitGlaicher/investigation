@@ -57,7 +57,7 @@ function SelectInvestigation() {
   ]);
   return (
     <div className={style.selectInvestigation}>
-      <h2 className={style.title}>תחקור</h2>
+      <h2 className={style.title}>תחקור חדש</h2>
       <table className={style.table}>
         <tbody>
           <tr>

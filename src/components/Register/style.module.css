@@ -9,6 +9,7 @@
 }
 
 .formLogin {
+  padding: 4%;
   width: 30%;
   height: 30%;
   background-color: var(--bg-thirdary-color);

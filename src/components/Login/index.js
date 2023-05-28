@@ -6,7 +6,6 @@ import Button from '../Button';
 import { useNavigate } from 'react-router-dom';
 import apiCalls from '../../Helpers/apiCalls';
 import { userContext } from '../LayOut';
-// import apiCalls from '../../Helpers/apiCalls';
 // import { userContext } from "../../App";
 
 function Login() {
@@ -22,7 +21,8 @@ function Login() {
     });
     localStorage.token = data.data.token;
     setUser(data.data.user);
-    navigate('../');
+    window.location.reload().then(() =>{
+    navigate('../')})
   };
   return (
     <div className={style.formLoginContainer}>
@@ -34,7 +34,7 @@ function Login() {
           name="input"
           placeholder="אימייל"
           required={true}
-          inputRef={userEmailInput}
+          inputref={userEmailInput}
         />
         <Input
           className={style.inputLogin}
@@ -42,7 +42,7 @@ function Login() {
           name="input"
           placeholder="סיסמה"
           required={true}
-          inputRef={userPasswordInput}
+          inputref={userPasswordInput}
         />
         <div className={style.login_buttons}>
           <Button type="submit" className={style.login_button} text="התחבר" />

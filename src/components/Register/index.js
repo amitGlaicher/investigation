@@ -38,7 +38,7 @@ export default function Register() {
           name="fName"
           required={true}
           placeholder="שם פרטי"
-          inputRef={userfNameInput}
+          inputref={userfNameInput}
         />
         <Input
           className={style.inputLogin}
@@ -46,7 +46,7 @@ export default function Register() {
           name="lName"
           required={true}
           placeholder="שם משפחה"
-          inputRef={userlNameInput}
+          inputref={userlNameInput}
         />
         <Input
           className={style.inputLogin}
@@ -54,7 +54,7 @@ export default function Register() {
           name="input"
           required={true}
           placeholder="אימייל"
-          inputRef={userEmailInput}
+          inputref={userEmailInput}
         />
         <Input
           className={style.inputLogin}
@@ -62,7 +62,7 @@ export default function Register() {
           name="firstPassword"
           required={true}
           placeholder="סיסמה"
-          inputRef={firstPassword}
+          inputref={firstPassword}
         />
         <div className={style.radio_container}>
           <label className={style.radio} htmlFor="male">

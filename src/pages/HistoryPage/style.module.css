@@ -1,8 +1,10 @@
 .historyPage {
   height: 100%;
-  width: 80%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   direction: rtl;
   font-family: 'Poppins', sans-serif;
+  align-items: center;
+  justify-content: center;
 }

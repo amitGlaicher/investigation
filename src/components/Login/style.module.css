@@ -8,7 +8,7 @@
 }
 
 .formLogin {
-  /* border: 1px solid seagreen; */
+  padding: 8%;
   width: 30%;
   height: 30%;
   background-color: var(--bg-thirdary-color);

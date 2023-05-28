@@ -1,8 +1,49 @@
-.vocabulary {
+/* .vocabulary {
   height: 100%;
   width: 80%;
   display: flex;
   flex-direction: column;
   direction: rtl;
   font-family: 'Poppins', sans-serif;
+} */
+
+
+.vocabularyContainer {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 4%;
+}
+
+
+.vocabulary {
+  width: 35%;
+  height: 5%;
+  margin: 1px;
+  background-color: var(--bg-thirdary-color);
+  border: solid 0.1px black;
+  font-size: var(--font-size-label);
+  color: white;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  direction: rtl;
+  align-items: center;
+  justify-content: space-around;
+}
+
+
+.vocabulary:hover {
+  transform: scale(1.01);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+

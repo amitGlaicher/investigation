@@ -5,6 +5,7 @@
   direction: rtl;
   background-color: var(--bg-secondary-color);
   font-size: var(--font-size-label);
+  color:  #fff;;
 }
 
 .icon {

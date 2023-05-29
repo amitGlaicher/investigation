@@ -6,6 +6,7 @@ import LoginPage from "../../pages/LoginPage";
 import apiCalls from "../../Helpers/apiCalls";
 
 export const userContext = createContext();
+export const testDataContext = createContext();
 function LayOut() {
   const [user, setUser] = useState(false);
   const navigate = useNavigate();

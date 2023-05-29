@@ -73,7 +73,7 @@ function SelectInvestigation() {
           <tr>
             <td> שם הסימולציה:</td>
             <td>
-              <Input type={'text'} setState={setSimulationName} />
+              <Input type={'text'} placeholder={"שם הסימולציה"} setState={setSimulationName} />
             </td>
           </tr>
           <tr>

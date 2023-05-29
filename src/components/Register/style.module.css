@@ -9,8 +9,8 @@
 }
 
 .formLogin {
-  padding: 4%;
-  width: 30%;
+  padding: 8%;
+  width: 40%;
   height: 30%;
   background-color: var(--bg-thirdary-color);
   font-size: var(--font-size-label);

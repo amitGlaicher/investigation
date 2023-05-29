@@ -27,7 +27,8 @@ function Choose({
           onInput={onInput}
         >
           {placeholder != null && (
-            <option value="" disabled selected>
+            //selected
+            <option value="" disabled> 
               {placeholder}
             </option>
           )}

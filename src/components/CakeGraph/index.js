@@ -1,10 +1,13 @@
 import style from './style.module.css';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Pie3D } from 'react-pie3d';
 import Button from '../Button';
+import { testDataContext } from '../LayOut';
 
 const CakeGraph = ({ setCakeGraph, handlePieClick, dataFromGraph }) => {
   const [lengthChapter, setLengthChapter] = useState(20);
+  const {testData} = useContext(testDataContext);
+  const [openSubCakeGraph, setOpenSubCakeGraph] = useState(false);
 
   useEffect(() => {
     if (dataFromGraph.name === 'כמותי') {
@@ -19,10 +22,11 @@ const CakeGraph = ({ setCakeGraph, handlePieClick, dataFromGraph }) => {
   const handleGraphClick = (e) => {
     if (e.target.textContent.includes('נכונות')) {
     } else {
-      // console.log(e.target.textContent);
+      console.log(e.target.textContent);
     }
   };
 
+  
   const data = [
     {
       label: 'תשובות נכונות',
@@ -36,8 +40,9 @@ const CakeGraph = ({ setCakeGraph, handlePieClick, dataFromGraph }) => {
     },
   ];
 
+
   return (
-    <div style={{ height: '300px', width: '300px' }} onClick={handleGraphClick}>
+    <div style={{ height: '400px', width: '400px' }} onClick={handleGraphClick}>
       <Pie3D data={data} />
       <Button text={'הקודם'} onClick={() => setCakeGraph(false)} />
     </div>

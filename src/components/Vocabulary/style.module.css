@@ -1,14 +1,4 @@
-/* .vocabulary {
-  height: 100%;
-  width: 80%;
-  display: flex;
-  flex-direction: column;
-  direction: rtl;
-  font-family: 'Poppins', sans-serif;
-} */
-
-
-.vocabularyContainer {
+ .vocabularyContainer {
   height: 100%;
   width: 100%;
   display: flex;
@@ -23,10 +13,7 @@
   margin: 4%;
 }
 
-
-.vocabulary {
-  width: 35%;
-  height: 5%;
+.word{
   margin: 1px;
   background-color: var(--bg-thirdary-color);
   border: solid 0.1px black;
@@ -35,15 +22,28 @@
   border-radius: 15px;
   display: flex;
   flex-direction: column;
-  direction: rtl;
+  width: 54.5vw;
   align-items: center;
-  justify-content: space-around;
+
 }
 
-
-.vocabulary:hover {
+.word:hover {
   transform: scale(1.01);
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   cursor: pointer;
 }
 
+.translation {
+  background-color: #ff7589;
+  color: white;
+  font-size: var(--font-size-label);
+  height: 47.8%;
+  align-items: center;
+  text-align: center;
+  width: 54.5vw;
+  border: solid 0.1px black;
+  border-radius: 15px;
+  align-items: center;
+  justify-content: center;
+  /* margin-top: 5px; */
+}

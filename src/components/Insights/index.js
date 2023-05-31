@@ -4,6 +4,7 @@ import { userContext } from "../LayOut";
 import Button from "../Button";
 import ConclusionGraph from "../ConclusionGraph";
 import { useNavigate } from "react-router-dom";
+import apiCalls from "../../Helpers/apiCalls";
 
 function Insights() {
   const { user } = useContext(userContext);
@@ -18,8 +19,14 @@ function Insights() {
     }
   };
 
-  const goToTestInvestigation = (testIndex) => {
-    navigate("../nextPage");
+  
+//כרגע העברת המבחן הספציפי בפופולייט לא עובדת
+  const goToTestInvestigation = async () => {
+    const getTest = await apiCalls("get", "test/getTest", {
+      test: user.test[selectedTestIndex]._id
+    });
+    console.log(getTest);
+    // navigate("../nextPage");
   };
 
   return (

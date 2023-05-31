@@ -18,7 +18,7 @@ present = present.toFixed(2);
       <div className={style.history}>
         <div className={style.miniTitle}>סך תשובות נכונות: {correctAnswerHistory} </div>
         <div className={style.miniTitle}>סך כלל התשובות: {wholeAnswerHistory} </div>
-        <div className={style.miniTitle}>אחוזי הצלחה: {present} </div>
+        <div className={style.miniTitle}>אחוזי הצלחה: {present}% </div>
       </div>
     </div>
   );

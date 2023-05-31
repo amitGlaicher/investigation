@@ -2,15 +2,16 @@ import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../Button';
 import style from './style.module.css';
-import apiCalls from '../../Helpers/apiCalls.js';
-import Answers from '../Answers';
+// import apiCalls from '../../Helpers/apiCalls.js';
+// import Answers from '../Answers';
 import { ansContext } from '../../App';
 import { userContext } from '../LayOut';
 
 function NavBar({ setToken }) {
   const answersContext = useContext(ansContext)
-  const {setUser} = useContext(userContext)
+  const {user,setUser} = useContext(userContext)
   const insights = async () => {
+    console.log(user);
     navigate('./insights');
   };
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ function NavBar({ setToken }) {
           navigate('./');
         }}
       />
-      <Button text={'רשימת לקחים'} onClick={insights} />
+      <Button text={'רשימת לקחים'} onClick={insights}  />
       <Button
         text={'אוצר מילים'}
         onClick={() => {

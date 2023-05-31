@@ -5,6 +5,7 @@ input[type='text'] {
   border-radius: 5px;
   background-color: #fff;
   color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   transition: border-color 0.2s ease-in-out;
 }
 
@@ -15,6 +16,7 @@ input[type='date'] {
   border-radius: 5px;
   background-color: #fff;
   color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   transition: border-color 0.2s ease-in-out;
 }
 
@@ -25,6 +27,7 @@ input[type='password'] {
   border-radius: 5px;
   background-color: #fff;
   color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   transition: border-color 0.2s ease-in-out;
 }
 
@@ -35,5 +38,6 @@ input[type='email'] {
   border-radius: 5px;
   background-color: #fff;
   color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   transition: border-color 0.2s ease-in-out;
 }

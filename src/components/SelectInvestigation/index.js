@@ -1,47 +1,63 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Button from '../Button';
-import Input from '../Input';
-import Choose from '../Choose';
-import style from './style.module.css';
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Button from "../Button";
+import Input from "../Input";
+import Choose from "../Choose";
+import style from "./style.module.css";
+import { userContext } from "../LayOut";
 
-const firstChoice = ['מבחן', 'פרק'];
-const numSumChapters = ['6', '8'];
-const topicChapter = ['כמותי', 'מילולי', 'אנגלית'];
-const numChapter = ['2', '3'];
+const firstChoice = ["מבחן", "פרק"];
+const numSumChapters = ["6", "8"];
+const topicChapter = ["כמותי", "מילולי", "אנגלית"];
+const numChapter = ["2", "3"];
 
 function SelectInvestigation() {
-  const [firstChoiceSet, setFirstChoiceSet] = useState('מבחן');
+  const [firstChoiceSet, setFirstChoiceSet] = useState("מבחן");
   const [simulationName, setSimulationName] = useState();
   const [simulationDate, setSimulationDate] = useState();
-  const [chapterName, setChapterName] = useState('כמותי');
-  const [numChapterSet, setNumChapterSet] = useState('6');
-  const [numCamuty, setNumCamuty] = useState('2');
-  const [numMiluly, setNumMiluly] = useState('2');
-  const [numEnglish, setNumEnglish] = useState('2');
+  const [chapterName, setChapterName] = useState("כמותי");
+  const [numChapterSet, setNumChapterSet] = useState("6");
+  const [numCamuty, setNumCamuty] = useState("2");
+  const [numMiluly, setNumMiluly] = useState("2");
+  const [numEnglish, setNumEnglish] = useState("2");
   const [disabledNext, setDisabledNext] = useState(true);
+  const [exist, setExist] = useState(false);
+  const { user } = useContext(userContext);
   const navigate = useNavigate();
   const onClick = () => {
     localStorage.setItem(
-      'chapters',
+      "chapters",
       JSON.stringify({
-        name: firstChoiceSet === 'פרק' ? [chapterName] : topicChapter,
+        name: firstChoiceSet === "פרק" ? [chapterName] : topicChapter,
         date: simulationDate,
         simName: simulationName,
-        num: firstChoiceSet === 'פרק' ? null : numChapterSet,
-        camuty: firstChoiceSet === 'פרק' ? null : numCamuty,
-        miluly: firstChoiceSet === 'פרק' ? null : numMiluly,
-        english: firstChoiceSet === 'פרק' ? null : numEnglish,
+        num: firstChoiceSet === "פרק" ? null : numChapterSet,
+        camuty: firstChoiceSet === "פרק" ? null : numCamuty,
+        miluly: firstChoiceSet === "פרק" ? null : numMiluly,
+        english: firstChoiceSet === "פרק" ? null : numEnglish,
       })
     );
-    navigate('./radioAnsPage');
+    navigate("./radioAnsPage");
   };
+
+  const checkIfNameExist = (e) => {
+    const value = e.target.value;
+    const nameExists = user.test.some((test) => test.simulationName === value);
+
+    if (value !== "" && nameExists) {
+      setExist(true);
+    } else {
+      setExist(false);
+    }
+  };
+
   useEffect(() => {
     if (
       simulationDate &&
       simulationName &&
+      !exist &&
       (Number(numCamuty) + Number(numMiluly) + Number(numEnglish) === 8 ||
-        numChapterSet === '6')
+        numChapterSet === "6")
     ) {
       setDisabledNext(false);
     } else {
@@ -71,18 +87,24 @@ function SelectInvestigation() {
             </td>
           </tr>
           <tr>
-            <td> שם הסימולציה:</td>
+            <td>שם הסימולציה:</td>
             <td>
-              <Input type={'text'} placeholder={"שם הסימולציה"} setState={setSimulationName} />
+              <Input
+                type={"text"}
+                placeholder={"שם הסימולציה"}
+                setState={setSimulationName}
+                onChange={checkIfNameExist}
+              />
+              {exist && <p>השם שבחרת קיים</p>}
             </td>
           </tr>
           <tr>
             <td> תאריך ביצוע:</td>
             <td>
-              <Input type={'date'} setState={setSimulationDate} />
+              <Input type={"date"} setState={setSimulationDate} />
             </td>
           </tr>
-          {firstChoiceSet === 'מבחן' && (
+          {firstChoiceSet === "מבחן" && (
             <>
               <tr>
                 <td>מספר פרקים</td>
@@ -90,7 +112,7 @@ function SelectInvestigation() {
                   <Choose array={numSumChapters} choice={setNumChapterSet} />
                 </td>
               </tr>
-              {numChapterSet === '8' && (
+              {numChapterSet === "8" && (
                 <tr>
                   <td>כמותי</td>
                   <td>
@@ -98,7 +120,7 @@ function SelectInvestigation() {
                   </td>
                 </tr>
               )}
-              {numChapterSet === '8' && (
+              {numChapterSet === "8" && (
                 <tr>
                   <td>מילולי</td>
                   <td>
@@ -106,7 +128,7 @@ function SelectInvestigation() {
                   </td>
                 </tr>
               )}
-              {numChapterSet === '8' && (
+              {numChapterSet === "8" && (
                 <tr>
                   <td>אנגלית</td>
                   <td>
@@ -117,7 +139,7 @@ function SelectInvestigation() {
             </>
           )}
 
-          {firstChoiceSet === 'פרק' && (
+          {firstChoiceSet === "פרק" && (
             <tr>
               <td>בחר פרק</td>
               <td>
@@ -128,7 +150,7 @@ function SelectInvestigation() {
         </tbody>
       </table>
       {firstChoiceSet && (
-        <Button text={'הבא'} disabled={disabledNext} onClick={onClick} />
+        <Button text={"הבא"} disabled={disabledNext} onClick={onClick} />
       )}
     </div>
   );

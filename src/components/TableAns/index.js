@@ -51,9 +51,10 @@ function TableAns() {
     const user = await apiCalls("put", "user/addtest", {
       simulationName: chapters.simName,
       numChapters: chapters.num,
+      date: chapters.date,
       data: arraybigData,
     });
-    setUser(user.data)
+    // setUser(user.data)
     navigate("../nextPage");
   };
 

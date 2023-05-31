@@ -2,12 +2,10 @@ import style from './style.module.css';
 import React, { useContext, useEffect, useState } from 'react';
 import { Pie3D } from 'react-pie3d';
 import Button from '../Button';
-import { testDataContext } from '../LayOut';
 
 const CakeGraph = ({ setCakeGraph, handlePieClick, dataFromGraph }) => {
   const [lengthChapter, setLengthChapter] = useState(20);
-  const {testData} = useContext(testDataContext);
-  const [openSubCakeGraph, setOpenSubCakeGraph] = useState(false);
+  // const [openSubCakeGraph, setOpenSubCakeGraph] = useState(false);
 
   useEffect(() => {
     if (dataFromGraph.name === 'כמותי') {

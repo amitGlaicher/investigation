@@ -55,7 +55,7 @@ function TableAns() {
       data: arraybigData,
     });
     // setUser(user.data)
-    navigate("../nextPage");
+    navigate("../nextPage",{state:{test:{}}});
   };
 
   useEffect(() => {
@@ -81,8 +81,6 @@ function TableAns() {
       }
     });
     if (title.name.length === 3) {
-      console.log(numClickNext);
-      console.log(chapter);
       if (numClickNext < title.camuty * 2) setChapter("כמותי");
       else if (numClickNext < title.camuty * 2 + title.miluly * 2)
         setChapter("מילולי");

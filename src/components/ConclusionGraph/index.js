@@ -12,7 +12,7 @@ import {
   Legend,
 } from 'recharts';
 
-function ConclusionGraph({ setCakeGraph, setDataFromGraph }) {
+function ConclusionGraph({ setCakeGraph, setDataFromGraph}) {
   const [camutyLength, setCamutyLength] = useState();
   const [milulyLength, setMilulyLength] = useState();
   const [englishLength, setEnglishLength] = useState();
@@ -26,52 +26,97 @@ function ConclusionGraph({ setCakeGraph, setDataFromGraph }) {
   });
   const title = JSON.parse(localStorage.getItem('chapters'));
   const answerContext = useContext(ansContext);
-
   useEffect(() => {
-    if (title['camuty'] === '1') {
-      const camutyArray = answerContext[0][0];
-      setData((prevData) => ({ ...prevData, camuty: camutyArray }));
-    } else if (title['camuty'] === '2') {
-      const camutyArray = answerContext[0][0].concat(answerContext[1][0]);
-      setData((prevData) => ({ ...prevData, camuty: camutyArray }));
-    } else {
-      const camutyArray = answerContext[0][0]
+    // if(Object.keys(test).length>0){
+    //   console.log(test);
+    //   const chapters = test.chapters
+    //   if (chapters[0].title==='כמותי'&&test.numChapters===1) {
+    //     const camutyArray = chapters[0].correct;
+    //     setData((prevData) => ({ ...prevData, camuty: camutyArray }));
+    //   } else if(chapters[2].title==='כמותי' ) {
+    //     const camutyArray = chapters[0].correct;
+    //     .concat(answerContext[1][0])
+    //     .concat(answerContext[2][0]);
+    //     setData((prevData) => ({ ...prevData, camuty: camutyArray }));
+    //   }
+    //   else{
+    //     const camutyArray = answerContext[0][0].concat(answerContext[1][0]);
+    //     setData((prevData) => ({ ...prevData, camuty: camutyArray }));
+    //   } 
+      
+    //   if (title['miluly'] === '1') {
+    //     const milulyArray = answerContext[0][0];
+    //     setData((prevData) => ({ ...prevData, miluly: milulyArray }));
+    //   } else if (title['miluly'] === '2') {
+    //     const milulyArray = answerContext[3][0].concat(answerContext[4][0]);
+    //     setData((prevData) => ({ ...prevData, miluly: milulyArray }));
+    //   } else {
+    //     const milulyArray = answerContext[3][0]
+    //     .concat(answerContext[4][0])
+    //     .concat(answerContext[5][0]);
+    //     setData((prevData) => ({ ...prevData, miluly: milulyArray }));
+    //   }
+      
+    //   if (title['english'] === '1') {
+    //     const englishArray = answerContext[0][0];
+    //     setData((prevData) => ({ ...prevData, english: englishArray }));
+    //   } else if (title['english'] === '2') {
+    //     const englishArray = answerContext[6][0].concat(answerContext[7][0]);
+    //     setData((prevData) => ({ ...prevData, english: englishArray }));
+    //   } else {
+    //     const englishArray = answerContext[6][0]
+    //     .concat(answerContext[7][0])
+    //     .concat(answerContext[8][0]);
+    //     setData((prevData) => ({ ...prevData, english: englishArray }));
+    //   }
+    // }
+    // else{
+      console.log(answerContext);
+      if (title['camuty'] === '1') {
+        const camutyArray = answerContext[0][0];
+        setData((prevData) => ({ ...prevData, camuty: camutyArray }));
+      } else if (title['camuty'] === '2') {
+        const camutyArray = answerContext[0][0].concat(answerContext[1][0]);
+        setData((prevData) => ({ ...prevData, camuty: camutyArray }));
+      } else {
+        const camutyArray = answerContext[0][0]
         .concat(answerContext[1][0])
         .concat(answerContext[2][0]);
-      setData((prevData) => ({ ...prevData, camuty: camutyArray }));
-    }
-
-    if (title['miluly'] === '1') {
-      const milulyArray = answerContext[0][0];
-      setData((prevData) => ({ ...prevData, miluly: milulyArray }));
-    } else if (title['miluly'] === '2') {
-      const milulyArray = answerContext[3][0].concat(answerContext[4][0]);
-      setData((prevData) => ({ ...prevData, miluly: milulyArray }));
-    } else {
-      const milulyArray = answerContext[3][0]
+        setData((prevData) => ({ ...prevData, camuty: camutyArray }));
+      }
+      
+      if (title['miluly'] === '1') {
+        const milulyArray = answerContext[0][0];
+        setData((prevData) => ({ ...prevData, miluly: milulyArray }));
+      } else if (title['miluly'] === '2') {
+        const milulyArray = answerContext[3][0].concat(answerContext[4][0]);
+        setData((prevData) => ({ ...prevData, miluly: milulyArray }));
+      } else {
+        const milulyArray = answerContext[3][0]
         .concat(answerContext[4][0])
         .concat(answerContext[5][0]);
-      setData((prevData) => ({ ...prevData, miluly: milulyArray }));
-    }
-
-    if (title['english'] === '1') {
-      const englishArray = answerContext[0][0];
-      setData((prevData) => ({ ...prevData, english: englishArray }));
-    } else if (title['english'] === '2') {
-      const englishArray = answerContext[6][0].concat(answerContext[7][0]);
-      setData((prevData) => ({ ...prevData, english: englishArray }));
-    } else {
-      const englishArray = answerContext[6][0]
+        setData((prevData) => ({ ...prevData, miluly: milulyArray }));
+      }
+      
+      if (title['english'] === '1') {
+        const englishArray = answerContext[0][0];
+        setData((prevData) => ({ ...prevData, english: englishArray }));
+      } else if (title['english'] === '2') {
+        const englishArray = answerContext[6][0].concat(answerContext[7][0]);
+        setData((prevData) => ({ ...prevData, english: englishArray }));
+      } else {
+        const englishArray = answerContext[6][0]
         .concat(answerContext[7][0])
         .concat(answerContext[8][0]);
-      setData((prevData) => ({ ...prevData, english: englishArray }));
+        setData((prevData) => ({ ...prevData, english: englishArray }));
+      // }
     }
-
-    setCamutyLength(
-      dataCorrect['camuty'].filter((correct) => correct === 'correct').length
-    );
-    setMilulyLength(
-      dataCorrect['miluly'].filter((correct) => correct === 'correct').length
+      
+      setCamutyLength(
+        dataCorrect['camuty'].filter((correct) => correct === 'correct').length
+        );
+        setMilulyLength(
+          dataCorrect['miluly'].filter((correct) => correct === 'correct').length
     );
     setEnglishLength(
       dataCorrect['english'].filter((correct) => correct === 'correct').length

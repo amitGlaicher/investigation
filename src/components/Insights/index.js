@@ -22,11 +22,11 @@ function Insights() {
   
 //כרגע העברת המבחן הספציפי בפופולייט לא עובדת
   const goToTestInvestigation = async () => {
-    const getTest = await apiCalls("get", "test/getTest", {
+    const getTest = await apiCalls("get", "test/getTest",{}, {
       test: user.test[selectedTestIndex]._id
     });
     console.log(getTest);
-    // navigate("../nextPage");
+    navigate("../nextPage",{state:{test:getTest.data}});
   };
 
   return (

@@ -5,6 +5,7 @@ import style from "./style.module.css";
 import { useLocation } from "react-router-dom";
 import { ansContext } from "../../App";
 import createDataGraph from "../../Helpers/createDataGraph";
+import createDataGraphIncorrect from "../../Helpers/createDataGraphIncorrect";
 
 function ConclusionPage() {
   const [cakeGraph, setCakeGraph] = useState(false);
@@ -12,6 +13,7 @@ function ConclusionPage() {
   const answerContext = useContext(ansContext);
   const { state } = useLocation();
   const dataToCorrectGraph = createDataGraph(state.test.chapters)
+  const dataToCorrectGraphIncorrect = createDataGraphIncorrect(state.test.chapters)
   const handlePieClick = (type) => {
     // console.log(type);
     // setCakeGraph(false);
@@ -117,7 +119,7 @@ function ConclusionPage() {
         temp++;
       }
     }
-    if (!localStorage.getItem("chapters")) {
+    if (localStorage.getItem("chapters")==='') {
       toLocalStorage();
       answerContext.forEach((event, index) => {
         event[1](
@@ -142,6 +144,7 @@ function ConclusionPage() {
           handlePieClick={handlePieClick}
           dataFromGraph={dataFromGraph}
           dataToCorrectGraph={dataToCorrectGraph}
+          dataToCorrectGraphIncorrect={dataToCorrectGraphIncorrect}
         />
       )}
     </div>

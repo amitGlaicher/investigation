@@ -25,7 +25,6 @@ function ConclusionGraph({ setCakeGraph, setDataFromGraph}) {
   const title = JSON.parse(localStorage.getItem('chapters'));
   const answerContext = useContext(ansContext);
   useEffect(() => {
-    console.log(answerContext);
     // if(Object.keys(test).length>0){
     //   console.log(test);
     //   const chapters = test.chapters

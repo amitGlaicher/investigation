@@ -146,7 +146,7 @@ function ConclusionGraph({ setCakeGraph, setDataFromGraph}) {
   return (
     <div className={style.concTest}>
       <h2> סיכום מבחן </h2>
-      <BarChart width={500} height={300} data={dataGraph}>
+      <BarChart width={1000} height={600} data={dataGraph}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis />

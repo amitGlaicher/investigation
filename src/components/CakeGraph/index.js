@@ -1,27 +1,51 @@
 import style from "./style.module.css";
 import React, { useContext, useEffect, useState } from "react";
-import { Pie3D } from "react-pie3d";
 import { Chart } from "primereact/chart";
 import Button from "../Button";
 
-const CakeGraph = ({ setCakeGraph, handlePieClick, dataFromGraph,dataToCorrectGraph,dataToCorrectGraphIncorrect }) => {
+const CakeGraph = ({
+  setCakeGraph,
+  handlePieClick,
+  dataFromGraph,
+  dataToCorrectGraph,
+  dataToCorrectGraphIncorrect,
+  dataMistakeReason,
+}) => {
   const [lengthChapter, setLengthChapter] = useState(0);
-  // const [openSubCakeGraph, setOpenSubCakeGraph] = useState(false);
-  const  [charData,setChartData] = useState({});
-  const  [chartDataCorrect,setChartDataCorrect] = useState({});
-  const  [chartDataIncorrect,setChartDataIncorrect] = useState({});
-  const [chartOptions,setChartOptions] = useState({});
-  const [chapterName,setChapterName] = useState()
+  const [charData, setChartData] = useState({});
+  const [chartDataCorrect, setChartDataCorrect] = useState({});
+  const [chartDataIncorrect, setChartDataIncorrect] = useState({});
+  const [chartOptions, setChartOptions] = useState({});
+  const [chapterName, setChapterName] = useState();
+
+  console.log(dataMistakeReason);
+
+  function getRandomRgbValue() {
+    return Math.floor(Math.random() * 256); // Generate a random number between 0 and 255
+  }
+
+  function getRandomRgbArray(length) {
+    const rgbArray = [];
+    for (let i = 0; i < length; i++) {
+      const r = getRandomRgbValue();
+      const g = getRandomRgbValue();
+      const b = getRandomRgbValue();
+      const rgbValue = `rgb(${r}, ${g}, ${b})`;
+      rgbArray.push(rgbValue);
+    }
+    return rgbArray;
+  }
+
   useEffect(() => {
     if (dataFromGraph.name === "כמותי") {
       setLengthChapter(20);
-      setChapterName('camuty')
+      setChapterName("camuty");
     } else if (dataFromGraph.name === "מילולי") {
       setLengthChapter(23);
-      setChapterName('miluly')
+      setChapterName("miluly");
     } else {
       setLengthChapter(22);
-      setChapterName('english')
+      setChapterName("english");
     }
   }, []);
 
@@ -32,96 +56,103 @@ const CakeGraph = ({ setCakeGraph, handlePieClick, dataFromGraph,dataToCorrectGr
     }
   };
   useEffect(() => {
-    console.log(chapterName);
-    if(chapterName){
+    if (chapterName) {
       const tempData = {
-        labels: ['correct', 'incorrect'],
+        labels: ["תשובות נכונות", "תשובות שגויות"],
         datasets: [
           {
-            data: [lengthChapter - dataFromGraph.value,dataFromGraph.value],
-            backgroundColor: [
-              'blue', 
-              'yellow', 
-            ],
-            hoverBackgroundColor: [
-              "blue", 
-              'yellow',
-            ]
-          }
-        ]
-      }
+            data: [lengthChapter - dataFromGraph.value, dataFromGraph.value],
+            backgroundColor: getRandomRgbArray(2),
+            hoverBackgroundColor: getRandomRgbArray(2),
+          },
+        ],
+      };
       const tempDataCorrect = {
-        labels: dataToCorrectGraph[chapterName].map(ans=>ans["גורם קושי"]),
+        labels: dataToCorrectGraph[chapterName].map((ans) => ans["גורם קושי"]),
         datasets: [
           {
-            data: dataToCorrectGraph[chapterName].map(ans=>ans.repeated),
-            backgroundColor: [
-              'blue', 
-              'yellow', 
-            ],
-            hoverBackgroundColor: [
-              "blue", 
-              'yellow',
-            ]
-          }
-        ]
-      }
+            data: dataToCorrectGraph[chapterName].map((ans) => ans.repeated),
+            backgroundColor: getRandomRgbArray(
+              dataToCorrectGraph[chapterName].length
+            ),
+            hoverBackgroundColor: getRandomRgbArray(
+              dataToCorrectGraph[chapterName].length
+            ),
+          },
+        ],
+      };
       const tempDataIncorrect = {
-        labels: dataToCorrectGraph[chapterName].map(ans=>ans["גורם קושי"]),
+        labels: dataToCorrectGraphIncorrect[chapterName].map(
+          (ans) => ans["גורם קושי"]
+        ),
         datasets: [
           {
-            data: dataToCorrectGraph[chapterName].map(ans=>ans.repeated),
-            backgroundColor: [
-              'rgb(200, 200, 200)', 
-              'yellow', 
-            ],
-            hoverBackgroundColor: [
-              "blue", 
-              'yellow',
-            ]
-          }
-        ]
-      }
+            data: dataToCorrectGraphIncorrect[chapterName].map(
+              (ans) => ans.repeated
+            ),
+            backgroundColor: getRandomRgbArray(
+              dataToCorrectGraphIncorrect[chapterName].length
+            ),
+            hoverBackgroundColor: getRandomRgbArray(
+              dataToCorrectGraphIncorrect[chapterName].length
+            ),
+          },
+        ],
+      };
       const options = {
         plugins: {
           legend: {
             labels: {
-              usePointStyle: true
-            }
-          }
-        }
+              usePointStyle: true,
+            },
+          },
+        },
       };
-      
+
       setChartData(tempData);
       setChartOptions(options);
-      setChartDataCorrect(tempDataCorrect)
-      setChartDataIncorrect(tempDataIncorrect)
+      setChartDataCorrect(tempDataCorrect);
+      setChartDataIncorrect(tempDataIncorrect);
     }
-}, [lengthChapter]);
+  }, [lengthChapter]);
 
   return (
-    <div style={{ height: "400px", width: "400px" }} onClick={handleGraphClick}>
+    <div className={style.pieGraph} onClick={handleGraphClick}>
       <label>פילוח תשובות</label>
       <Chart
         type="doughnut"
         data={charData}
         options={chartOptions}
-        style={{ height: "400px", width: "400px"}}
+        style={{ height: "300px", width: "300px" }}
       />
-      <label>תשובות נכונות גורמי קושי</label>
-      <Chart
-        type="doughnut"
-        data={chartDataCorrect}
-        options={chartOptions}
-        style={{ height: "400px", width: "400px"}}
-      />
-      <label>תשובות לא נכונות גורמי קושי</label>
-      <Chart
-        type="doughnut"
-        data={chartDataIncorrect}
-        options={chartOptions}
-        style={{ height: "400px", width: "400px"}}
-      />
+      <div className={style.pieGraphMore}>
+        <div>
+          <label>תשובות נכונות גורמי קושי</label>
+          <Chart
+            type="doughnut"
+            data={chartDataCorrect}
+            options={chartOptions}
+            style={{ height: "250px", width: "250px" }}
+          />
+        </div>
+        <div>
+          <label>תשובות לא נכונות גורמי קושי</label>
+          <Chart
+            type="doughnut"
+            data={chartDataIncorrect}
+            options={chartOptions}
+            style={{ height: "250px", width: "250px" }}
+          />
+        </div>
+        {/* <div>
+          <label>הסיבה לטעות:</label>
+          <ul>
+            {dataMistakeReason[chapterName].map((mistakeReason, index) => (
+              <li key={index}>{mistakeReason}</li>
+            ))}
+          </ul>
+        </div> */}
+      </div>
       <Button text={"הקודם"} onClick={() => setCakeGraph(false)} />
     </div>
   );

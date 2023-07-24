@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom";
 import { ansContext } from "../../App";
 import createDataGraph from "../../Helpers/createDataGraph";
 import createDataGraphIncorrect from "../../Helpers/createDataGraphIncorrect";
+import createDataMistakeReason from "../../Helpers/createDataMistakeReason";
 
 function ConclusionPage() {
   const [cakeGraph, setCakeGraph] = useState(false);
@@ -14,6 +15,8 @@ function ConclusionPage() {
   const { state } = useLocation();
   const dataToCorrectGraph = createDataGraph(state.test.chapters)
   const dataToCorrectGraphIncorrect = createDataGraphIncorrect(state.test.chapters)
+  const dataMistakeReason = createDataMistakeReason(state.test.chapters)
+  console.log(dataMistakeReason);
   const handlePieClick = (type) => {
     // console.log(type);
     // setCakeGraph(false);
@@ -142,6 +145,7 @@ function ConclusionPage() {
         <CakeGraph
           setCakeGraph={setCakeGraph}
           handlePieClick={handlePieClick}
+          dataMistakeReason={dataMistakeReason}
           dataFromGraph={dataFromGraph}
           dataToCorrectGraph={dataToCorrectGraph}
           dataToCorrectGraphIncorrect={dataToCorrectGraphIncorrect}

@@ -12,7 +12,7 @@ function MyAdvanced() {
     const myChart = new Chart(chartRef.current, {
       type: 'line',
       data: {
-        labels: user.test.map(test => `שם ותאריך בחינה: ${test.simulationName} ${test.createDate} `),
+        labels: user.test.map(test => test.simulationName +" "+ test.createDate),
         datasets: [
           {
             label: 'ההתקדמות שלי',

@@ -1,0 +1,14 @@
+.pieGraph{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 25px;
+}
+
+
+.pieGraphMore{
+    font-size: 17px;
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+}

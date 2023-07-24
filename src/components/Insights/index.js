@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import style from "./style.module.css";
 import { userContext } from "../LayOut";
 import Button from "../Button";
-import ConclusionGraph from "../ConclusionGraph";
 import { useNavigate } from "react-router-dom";
 import apiCalls from "../../Helpers/apiCalls";
 
@@ -10,7 +9,7 @@ function Insights() {
   const { user } = useContext(userContext);
   const [selectedTestIndex, setSelectedTestIndex] = useState(null);
   const navigate = useNavigate();
-  localStorage.setItem('chapters','')
+  localStorage.setItem("chapters", "");
   const onClick = (testIndex) => {
     if (selectedTestIndex === testIndex) {
       setSelectedTestIndex(null);
@@ -19,14 +18,17 @@ function Insights() {
     }
   };
 
-  
-//כרגע העברת המבחן הספציפי בפופולייט לא עובדת
   const goToTestInvestigation = async () => {
-    const getTest = await apiCalls("get", "test/getTest",{}, {
-      test: user.test[selectedTestIndex]._id
-    });
+    const getTest = await apiCalls(
+      "get",
+      "test/getTest",
+      {},
+      {
+        test: user.test[selectedTestIndex]._id,
+      }
+    );
     console.log(getTest);
-    navigate("../nextPage",{state:{test:getTest.data}});
+    navigate("../nextPage", { state: { test: getTest.data } });
   };
 
   return (
@@ -45,12 +47,14 @@ function Insights() {
                     <tr>
                       <th>נושא</th>
                       <th>תת-נושא</th>
+                      <th>מספר שאלה</th>
+                      <th>סוג לקח</th>
                       <th>לקח</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr className={style.tr_cell} >
-                      <td colSpan="3">
+                    <tr className={style.tr_cell}>
+                      <td colSpan="5">
                         <h6>כמותי</h6>
                       </td>
                     </tr>
@@ -58,11 +62,13 @@ function Insights() {
                       <tr key={insIndex}>
                         <td className={style.topic}>{ins.topic}</td>
                         <td className={style.topic}>{ins.subtopic}</td>
+                        <td className={style.question}>{ins.numQuestion}</td>
+                        <td className={style.topic}>{ins.kindOfInsight}</td>
                         <td>{ins.ins}</td>
                       </tr>
                     ))}
                     <tr>
-                      <td colSpan="3">
+                      <td colSpan="5">
                         <h6>מילולי</h6>
                       </td>
                     </tr>
@@ -70,11 +76,13 @@ function Insights() {
                       <tr key={insIndex}>
                         <td className={style.topic}>{ins.topic}</td>
                         <td className={style.topic}>{ins.subtopic}</td>
+                        <td className={style.question}>{ins.numQuestion}</td>
+                        <td className={style.topic}>{ins.kindOfInsight}</td>
                         <td>{ins.ins}</td>
                       </tr>
                     ))}
                     <tr>
-                      <td colSpan="3">
+                      <td colSpan="5">
                         <h6>אנגלית</h6>
                       </td>
                     </tr>
@@ -82,12 +90,18 @@ function Insights() {
                       <tr key={insIndex}>
                         <td className={style.topic}>{ins.topic}</td>
                         <td className={style.topic}>{ins.subtopic}</td>
+                        <td className={style.question}>{ins.numQuestion}</td>
+                        <td className={style.topic}>{ins.kindOfInsight}</td>
                         <td>{ins.ins}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
-                    <Button className={style.button} text={"לתחקור המלא"} onClick={goToTestInvestigation} />
+                <Button
+                  className={style.button}
+                  text={"לתחקור המלא"}
+                  onClick={goToTestInvestigation}
+                />
               </div>
             )}
           </div>

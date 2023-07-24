@@ -10,7 +10,7 @@ function Insights() {
   const { user } = useContext(userContext);
   const [selectedTestIndex, setSelectedTestIndex] = useState(null);
   const navigate = useNavigate();
-
+  localStorage.setItem('chapters','')
   const onClick = (testIndex) => {
     if (selectedTestIndex === testIndex) {
       setSelectedTestIndex(null);
@@ -85,9 +85,9 @@ function Insights() {
                         <td>{ins.ins}</td>
                       </tr>
                     ))}
-                    <Button className={style.button} text={"לתחקור המלא"} onClick={goToTestInvestigation} />
                   </tbody>
                 </table>
+                    <Button className={style.button} text={"לתחקור המלא"} onClick={goToTestInvestigation} />
               </div>
             )}
           </div>

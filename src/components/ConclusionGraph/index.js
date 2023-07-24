@@ -13,9 +13,7 @@ import {
 } from 'recharts';
 
 function ConclusionGraph({ setCakeGraph, setDataFromGraph}) {
-  const [camutyLength, setCamutyLength] = useState();
-  const [milulyLength, setMilulyLength] = useState();
-  const [englishLength, setEnglishLength] = useState();
+  let camutyLength,milulyLength, englishLength 
   const [dataGraph, setDataGraph] = useState();
   const [render, setRender] = useState();
   const [moreRender, setMoreRender] = useState();
@@ -27,6 +25,7 @@ function ConclusionGraph({ setCakeGraph, setDataFromGraph}) {
   const title = JSON.parse(localStorage.getItem('chapters'));
   const answerContext = useContext(ansContext);
   useEffect(() => {
+    console.log(answerContext);
     // if(Object.keys(test).length>0){
     //   console.log(test);
     //   const chapters = test.chapters
@@ -71,7 +70,6 @@ function ConclusionGraph({ setCakeGraph, setDataFromGraph}) {
     //   }
     // }
     // else{
-      console.log(answerContext);
       if (title['camuty'] === '1') {
         const camutyArray = answerContext[0][0];
         setData((prevData) => ({ ...prevData, camuty: camutyArray }));
@@ -112,15 +110,12 @@ function ConclusionGraph({ setCakeGraph, setDataFromGraph}) {
       // }
     }
       
-      setCamutyLength(
+    camutyLength=
         dataCorrect['camuty'].filter((correct) => correct === 'correct').length
-        );
-        setMilulyLength(
+    milulyLength=
           dataCorrect['miluly'].filter((correct) => correct === 'correct').length
-    );
-    setEnglishLength(
+    englishLength=
       dataCorrect['english'].filter((correct) => correct === 'correct').length
-    );
     if (!render) {
       setRender(true);
     } else {

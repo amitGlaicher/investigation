@@ -12,7 +12,7 @@ function LayOut() {
   const navigate = useNavigate();
   const getUser = async () => {
     const res = await apiCalls("get", "user");
-    console.log(res);
+    // console.log(res);
     setUser(res.data);
     navigate("./");
   };

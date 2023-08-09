@@ -27,7 +27,7 @@ function Insights() {
         test: user.test[selectedTestIndex]._id,
       }
     );
-    console.log(getTest);
+    // console.log(getTest);
     navigate("../nextPage", { state: { test: getTest.data } });
   };
 

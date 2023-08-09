@@ -1,14 +1,33 @@
-.pieGraph{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 25px;
+.pieGraph {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 25px;
 }
 
+.title {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 140px;
+  left: 200px;
+  font-size: 17px;
+}
 
-.pieGraphMore{
-    font-size: 17px;
-    display: flex;
-    flex-direction:row;
-    align-items: center;
+.mistakeReason {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  border: solid 1px cadetblue;
+  width: 200px;
+  height: 200px;
+  font-size: 17px;
+  border-radius: 15%;
+}
+
+.pieGraphMore {
+  font-size: 17px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }

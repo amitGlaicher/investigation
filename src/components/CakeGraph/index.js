@@ -2,28 +2,38 @@ import style from "./style.module.css";
 import React, { useContext, useEffect, useState } from "react";
 import { Chart } from "primereact/chart";
 import Button from "../Button";
+// import * as React from 'react';
+import Box from '@mui/material/Box';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import { FixedSizeList } from 'react-window';
+
 
 const CakeGraph = ({
   setCakeGraph,
-  handlePieClick,
   dataFromGraph,
   dataToCorrectGraph,
   dataToCorrectGraphIncorrect,
   dataMistakeReason,
+  dataSolveWay,
+  dataTypeOfError,
 }) => {
   const [lengthChapter, setLengthChapter] = useState(0);
   const [charData, setChartData] = useState({});
   const [chartDataCorrect, setChartDataCorrect] = useState({});
   const [chartDataIncorrect, setChartDataIncorrect] = useState({});
+  const [chartDataSolveWay, setChartDataSolveWay] = useState({});
+  const [chartDataTypeOfError, setDataTypeOfError] = useState({});
   const [chartOptions, setChartOptions] = useState({});
   const [chapterName, setChapterName] = useState();
+  
+  
+    function getRandomRgbValue() {
+      return Math.floor(Math.random() * 256);
+    }
 
-  console.log(dataMistakeReason);
-
-  function getRandomRgbValue() {
-    return Math.floor(Math.random() * 256); // Generate a random number between 0 and 255
-  }
-
+  
   function getRandomRgbArray(length) {
     const rgbArray = [];
     for (let i = 0; i < length; i++) {
@@ -49,12 +59,6 @@ const CakeGraph = ({
     }
   }, []);
 
-  const handleGraphClick = (e) => {
-    if (e.target.textContent.includes("נכונות")) {
-    } else {
-      console.log(e.target.textContent);
-    }
-  };
   useEffect(() => {
     if (chapterName) {
       const tempData = {
@@ -99,6 +103,27 @@ const CakeGraph = ({
           },
         ],
       };
+
+      const tempDataSolveWay = {
+        labels: dataSolveWay.camuty.map((ans) => ans["דרך פתרון"]),
+        datasets: [
+          {
+            data: dataSolveWay.camuty.map((ans) => ans.repeated),
+            backgroundColor: getRandomRgbArray(dataSolveWay.camuty.length),
+            hoverBackgroundColor: getRandomRgbArray(dataSolveWay.camuty.length),
+          },
+        ],
+      };
+      const tempDataTypeOfError = {
+        labels: dataTypeOfError.camuty.map((ans) => ans["סוג הטעות"]),
+        datasets: [
+          {
+            data: dataTypeOfError.camuty.map((ans) => ans.repeated),
+            backgroundColor: getRandomRgbArray(dataSolveWay.camuty.length),
+            hoverBackgroundColor: getRandomRgbArray(dataSolveWay.camuty.length),
+          },
+        ],
+      };
       const options = {
         plugins: {
           legend: {
@@ -113,11 +138,13 @@ const CakeGraph = ({
       setChartOptions(options);
       setChartDataCorrect(tempDataCorrect);
       setChartDataIncorrect(tempDataIncorrect);
+      setChartDataSolveWay(tempDataSolveWay);
+      setDataTypeOfError(tempDataTypeOfError);
     }
   }, [lengthChapter]);
 
   return (
-    <div className={style.pieGraph} onClick={handleGraphClick}>
+    <div className={style.pieGraph}>
       <label>פילוח תשובות</label>
       <Chart
         type="doughnut"
@@ -125,7 +152,30 @@ const CakeGraph = ({
         options={chartOptions}
         style={{ height: "300px", width: "300px" }}
       />
+      <div className={style.title}>
+        <label>הסיבה לטעות:</label>
+        <ul className={style.mistakeReason}>
+          {dataMistakeReason[chapterName]?.map((mistakeReason, index) => (
+            <li key={index}>{mistakeReason}</li>
+          ))}
+        </ul>
+      </div>
+
+
+
+
       <div className={style.pieGraphMore}>
+        {dataFromGraph.name == "כמותי" && (
+          <div>
+            <label>דרך הפתרון</label>
+            <Chart
+              type="doughnut"
+              data={chartDataSolveWay}
+              options={chartOptions}
+              style={{ height: "250px", width: "250px" }}
+            />
+          </div>
+        )}
         <div>
           <label>תשובות נכונות גורמי קושי</label>
           <Chart
@@ -144,14 +194,17 @@ const CakeGraph = ({
             style={{ height: "250px", width: "250px" }}
           />
         </div>
-        {/* <div>
-          <label>הסיבה לטעות:</label>
-          <ul>
-            {dataMistakeReason[chapterName].map((mistakeReason, index) => (
-              <li key={index}>{mistakeReason}</li>
-            ))}
-          </ul>
-        </div> */}
+        {dataFromGraph.name == "כמותי" && (
+          <div>
+            <label>סוג הטעות</label>
+            <Chart
+              type="doughnut"
+              data={chartDataTypeOfError}
+              options={chartOptions}
+              style={{ height: "250px", width: "250px" }}
+            />
+          </div>
+        )}
       </div>
       <Button text={"הקודם"} onClick={() => setCakeGraph(false)} />
     </div>

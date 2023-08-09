@@ -48,16 +48,24 @@ function Vocabulary() {
   return (
     <div className={style.vocabularyContainer}>
       <h2 className={style.title}>אוצר מילים</h2>
-      {user.vocabulary.map((word, index) => (
-        <div className={style.wordContainer} key={index}>
-          <div className={style.word} onClick={() => translateWord(word)}>
-            {word}
+      <div className={style.wordContainer}>
+        {user.vocabulary.map((word, index) => (
+          <div>
+            <div
+              key={index}
+              className={style.word}
+              onClick={() => translateWord(word)}
+            >
+              {word}
+            </div>
+            {/* {selectedWord === word && (
+              <div className={style.translation}>{translation}</div>
+            )} */}
           </div>
-          {selectedWord === word && (
-            <div className={style.translation}>{translation}</div>
-          )}
-        </div>
-      ))}
+        ))}
+      </div>
+      <h6>תרגום:</h6>
+      <div className={style.translation}>{translation}</div>
     </div>
   );
 }

@@ -9,11 +9,12 @@ import Miluly from "../Miluly";
 import style from "./style.module.css";
 import apiCalls from "../../Helpers/apiCalls.js";
 import { userContext } from "../LayOut";
+import { ProgressSpinner } from "primereact/progressspinner";
 
 function TableAns() {
   const submitRef = useRef();
   const answerContext = useContext(ansContext);
-  const {setUser} = useContext(userContext);
+  const { setUser } = useContext(userContext);
   const [numClickNext, setNumClickNext] = useState(0);
   const [arrayToMap, setArrayToMap] = useState([]);
   const [chapter, setChapter] = useState();
@@ -55,7 +56,7 @@ function TableAns() {
       data: arraybigData,
     });
     // setUser(user.data)
-    navigate("../nextPage",{state:{test:{}}});
+    navigate("../nextPage", { state: { test: {} } });
   };
 
   useEffect(() => {
@@ -87,9 +88,9 @@ function TableAns() {
       else if (
         numClickNext <=
         title.camuty * 2 + title.miluly * 2 + title.english * 2
-      ){
-        setChapter("אנגלית");}
-      else {
+      ) {
+        setChapter("אנגלית");
+      } else {
         setLoading(true);
         sendUseData();
         return;
@@ -196,7 +197,10 @@ function TableAns() {
     setUseData((prev) => [...prev, ...arrayDataForUseData]);
   };
   return loading ? (
-    <h2>טוען</h2>
+    // <h2>טוען</h2>
+    <div className="card flex justify-content-center">
+      <ProgressSpinner />
+    </div>
   ) : (
     <div className={style.tableAns_container}>
       <h2 className={style.title}>{`פרק ${chapter}`}</h2>

@@ -7,20 +7,24 @@ import { ansContext } from "../../App";
 import createDataGraph from "../../Helpers/createDataGraph";
 import createDataGraphIncorrect from "../../Helpers/createDataGraphIncorrect";
 import createDataMistakeReason from "../../Helpers/createDataMistakeReason";
+import createSolveWay from "../../Helpers/createSolveWay";
+import createTypeOfError from "../../Helpers/createTypeOfError";
 
 function ConclusionPage() {
   const [cakeGraph, setCakeGraph] = useState(false);
   const [dataFromGraph, setDataFromGraph] = useState();
   const answerContext = useContext(ansContext);
   const { state } = useLocation();
-  const dataToCorrectGraph = createDataGraph(state.test.chapters)
-  const dataToCorrectGraphIncorrect = createDataGraphIncorrect(state.test.chapters)
-  const dataMistakeReason = createDataMistakeReason(state.test.chapters)
+  const dataToCorrectGraph = createDataGraph(state.test.chapters);
+  const dataToCorrectGraphIncorrect = createDataGraphIncorrect(
+    state.test.chapters
+  );
+  const dataMistakeReason = createDataMistakeReason(state.test.chapters);
+  const dataSolveWay = createSolveWay(state.test.chapters);
+  const dataTypeOfError = createTypeOfError(state.test.chapters);
   console.log(dataMistakeReason);
-  const handlePieClick = (type) => {
     // console.log(type);
     // setCakeGraph(false);
-  };
   const toLocalStorage = () => {
     let camuty = 0;
     let miluly = 0;
@@ -60,7 +64,7 @@ function ConclusionPage() {
     let temp = 0;
 
     for (let i = 0; i < 9; i++) {
-      console.log(state.test.chapters[i]?.title);
+      // console.log(state.test.chapters[i]?.title);
       if (i === 2) {
         if (state.test.chapters[i].title === "כמותי") {
           toContextArray.push(
@@ -122,16 +126,16 @@ function ConclusionPage() {
         temp++;
       }
     }
-    if (localStorage.getItem("chapters")==='') {
+    if (localStorage.getItem("chapters") === "") {
       toLocalStorage();
       answerContext.forEach((event, index) => {
         event[1](
           toContextArray[index].length > 0
-          ? toContextArray[index].split(",")
-          : []
-          );
-        });
-      }
+            ? toContextArray[index].split(",")
+            : []
+        );
+      });
+    }
   }
 
   return (
@@ -144,11 +148,12 @@ function ConclusionPage() {
       ) : (
         <CakeGraph
           setCakeGraph={setCakeGraph}
-          handlePieClick={handlePieClick}
           dataMistakeReason={dataMistakeReason}
           dataFromGraph={dataFromGraph}
           dataToCorrectGraph={dataToCorrectGraph}
           dataToCorrectGraphIncorrect={dataToCorrectGraphIncorrect}
+          dataSolveWay={dataSolveWay}
+          dataTypeOfError={dataTypeOfError}
         />
       )}
     </div>

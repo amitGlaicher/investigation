@@ -11,7 +11,7 @@ function NavBar({ setToken }) {
   const answersContext = useContext(ansContext);
   const { user, setUser } = useContext(userContext);
   const insights = async () => {
-    console.log(user);
+    // console.log(user);
     navigate("./insights");
   };
   const navigate = useNavigate();
